@@ -1,0 +1,6 @@
+include ':feature'
+include ':domain'
+include ':app'
+include ':data'
+include ':core'
+rootProject.name = "tmdb"
