@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 
 android {
@@ -27,10 +28,19 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation deps.core.kotlin
-    implementation deps.androidx.androidXCore
-    implementation deps.androidx.appCompat
-    implementation deps.androidx.constraintLayout
+    implementation deps.androidx.androidx_core
+    implementation deps.androidx.app_compat
+    implementation deps.androidx.constraint_layout
+    implementation deps.dagger.dagger
+    implementation deps.dagger.dagger_android
+    kapt deps.dagger.dagger_compiler
+    kapt deps.dagger.dagger_processor
     testImplementation deps.test.junit
     androidTestImplementation deps.test.xJunit
     androidTestImplementation deps.test.espressoCore
+
+    // Modules dependencies
+    implementation project(':data')
+    implementation project(':feature')
+    implementation project(':core')
 }
