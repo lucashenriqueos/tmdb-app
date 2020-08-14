@@ -2,12 +2,11 @@ package org.lucashos.core.di
 
 import dagger.Module
 import dagger.Provides
+import org.lucashos.core.dummy.CoreDummy
 
 @Module
-interface CoreModule {
+class CoreModule {
 
     @Provides
-    fun providesApiClient() {
-
-    }
+    fun providesCoreDummy(): CoreDummy = CoreDummy()
 }

@@ -1,16 +1,13 @@
 package org.lucashos.tmdb
 
-import android.app.Application
+import dagger.android.AndroidInjector
+import dagger.android.DaggerApplication
+import dagger.android.HasAndroidInjector
 import org.lucashos.tmdb.di.DaggerApplicationComponent
 
-class TmdbApplication : Application() {
+class TmdbApplication : DaggerApplication(), HasAndroidInjector {
 
-    override fun onCreate() {
-        super.onCreate()
-        initDagger()
-    }
-
-    fun initDagger() {
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> =
         DaggerApplicationComponent.factory().create(this)
-    }
+
 }

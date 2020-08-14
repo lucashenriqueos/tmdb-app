@@ -1,14 +1,17 @@
 package org.lucashos.tmdb.di
 
-import android.content.Context
 import dagger.Module
-import dagger.Provides
-import org.lucashos.tmdb.TmdbApplication
-import javax.inject.Singleton
+import dagger.android.ContributesAndroidInjector
+import org.lucashos.core.di.CoreModule
+import org.lucashos.data.di.DataModule
+import org.lucashos.feature.di.FeatureModule
+import org.lucashos.tmdb.MainActivity
 
 @Module
-internal class ApplicationModule {
-    @Provides
-    @Singleton
-    fun provideContext(application: TmdbApplication): Context = application.applicationContext
+abstract class ApplicationModule {
+
+    @ContributesAndroidInjector(modules = [DataModule::class, CoreModule::class, FeatureModule::class, ApplicationProvider::class])
+    abstract fun providesMainActivity(): MainActivity
+
+
 }

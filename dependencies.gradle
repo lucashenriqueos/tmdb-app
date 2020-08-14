@@ -21,9 +21,9 @@ ext {
 
             ],
             androidx: [
-                    androidXCore    : "androidx.core:core-ktx:$deps_versions.androidx_core_version",
-                    appCompat   : "androidx.appcompat:appcompat:$deps_versions.appcompat_version",
-                    constraintLayout: "androidx.constraintlayout:constraintlayout:$deps_versions.constraintlayout_version",
+                    androidx_core    : "androidx.core:core-ktx:$deps_versions.androidx_core_version",
+                    app_compat   : "androidx.appcompat:appcompat:$deps_versions.appcompat_version",
+                    constraint_layout: "androidx.constraintlayout:constraintlayout:$deps_versions.constraintlayout_version",
                     viewModel   : "androidx.lifecycle:lifecycle-viewmodel-ktx:$deps_versions.lifecycle_version",
                     livedata    : "androidx.lifecycle:lifecycle-livedata-ktx:$deps_versions.lifecycle_version",
             ],
