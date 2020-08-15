@@ -32,4 +32,6 @@ dependencies {
     implementation deps.androidx.androidx_core
     testImplementation deps.test.junit
     androidTestImplementation deps.test.xJunit
+
+    implementation project(":core")
 }

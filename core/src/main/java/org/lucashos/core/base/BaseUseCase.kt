@@ -1,4 +1,4 @@
-package org.lucashos.domain.usecase
+package org.lucashos.core.base
 
 import io.reactivex.Single
 
