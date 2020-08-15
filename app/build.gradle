@@ -33,6 +33,7 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation deps.core.kotlin
+    implementation deps.core.rxjava
     implementation deps.androidx.androidx_core
     implementation deps.androidx.app_compat
     implementation deps.androidx.constraint_layout
@@ -48,4 +49,5 @@ dependencies {
     implementation project(':data')
     implementation project(':feature')
     implementation project(':core')
+    implementation project(':domain')
 }

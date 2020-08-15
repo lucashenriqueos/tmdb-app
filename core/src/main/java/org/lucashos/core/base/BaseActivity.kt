@@ -1,4 +1,4 @@
-package org.lucashos.core
+package org.lucashos.core.base
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

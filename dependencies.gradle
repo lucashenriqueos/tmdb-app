@@ -11,13 +11,15 @@ ext {
             arch_version                : '2.1.0',
             lifecycle_version           : '2.2.0',
             rxjava_version              : '2.2.19',
+            rxandroid_version              : '2.1.1',
             retrofit_version            : '2.9.0',
     ]
 
     deps = [
             core    : [
                     kotlin      : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
-                    rxjava      : "io.reactivex.rxjava2:rxjava:$deps_versions.rxjava_version"
+                    rxjava      : "io.reactivex.rxjava2:rxjava:$deps_versions.rxjava_version",
+                    rxandroid      : "io.reactivex.rxjava2:rxandroid:$deps_versions.rxandroid_version"
 
             ],
             androidx: [
