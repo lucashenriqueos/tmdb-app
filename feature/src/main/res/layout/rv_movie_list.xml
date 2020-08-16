@@ -24,8 +24,8 @@
 
             <ImageView
                 android:id="@+id/iv_item_movie_folder"
-                android:layout_width="75dp"
-                android:layout_height="120dp"
+                android:layout_width="@dimen/folder_thumbnail_width"
+                android:layout_height="@dimen/folder_thumbnail_height"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:src="@drawable/ic_baseline_movie_24" />

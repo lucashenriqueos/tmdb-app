@@ -6,6 +6,7 @@ import org.lucashos.domain.entity.MovieBO
 
 object MovieMapper : BaseMapper<MovieResponse, MovieBO> {
     override fun from(from: MovieResponse): MovieBO = MovieBO(
+        id = from.id,
         title = from.title,
         rating = from.rating,
         releaseDate = from.releaseDate,
