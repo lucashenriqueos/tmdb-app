@@ -1,10 +1,9 @@
 package org.lucashos.domain.entity
 
-class MovieBO(
-    val id: Int,
+class MovieDetailBO(
     val title: String,
     val overview: String,
-    val genres: List<Int>,
+    val genres: List<GenreBO>,
     val releaseDate: String,
     val posterPath: String,
     val rating: Double
