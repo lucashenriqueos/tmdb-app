@@ -38,7 +38,7 @@ class TopMoviesActivity : BaseActivity(R.layout.activity_top_movies) {
     }
 
     private fun initObservers() {
-        topMoviesViewModel.moviesLIstLiveData.observe({ lifecycle }) {
+        topMoviesViewModel.moviesListLiveData.observe({ lifecycle }) {
             it.fold(::handleMovieError, ::handleMovieSuccess)
         }
     }

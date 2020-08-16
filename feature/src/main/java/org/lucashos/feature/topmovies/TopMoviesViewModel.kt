@@ -15,7 +15,7 @@ class TopMoviesViewModel(
     private val _movieListLiveData: MutableLiveData<Either<Throwable, MoviesListBO>> =
         MutableLiveData()
 
-    val moviesLIstLiveData: LiveData<Either<Throwable, MoviesListBO>>
+    val moviesListLiveData: LiveData<Either<Throwable, MoviesListBO>>
         get() = _movieListLiveData
 
     fun getTopMovies(page: Int = 1) {
