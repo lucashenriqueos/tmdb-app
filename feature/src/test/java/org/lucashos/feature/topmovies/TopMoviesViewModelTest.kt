@@ -14,6 +14,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import org.lucashos.domain.usecase.ListTopMoviesUseCase
+import org.lucashos.domain.usecase.SearchMoviesUseCase
 import org.lucashos.domain.utils.Either
 import org.lucashos.feature.RxImmediateSchedulerRule
 import org.lucashos.feature.model.createTopRatedMoviesMock
@@ -31,6 +32,9 @@ class TopMoviesViewModelTest {
     @MockK
     lateinit var topMoviesUseCase: ListTopMoviesUseCase
 
+    @MockK
+    lateinit var searchMoviesUseCase: SearchMoviesUseCase
+
     @InjectMockKs
     lateinit var viewModel: TopMoviesViewModel
 
@@ -40,25 +44,49 @@ class TopMoviesViewModelTest {
     }
 
     @Test
-    fun `Should return top rated movies on Either`() {
+    fun `Should return top rated movies`() {
         val mock = createTopRatedMoviesMock()
         every {
             topMoviesUseCase.execute(any())
         } returns Single.just(mock)
         viewModel.getTopMovies(1)
-        val result = viewModel.topMoviesLiveData.value as Either
+        val result = viewModel.moviesListLiveData.value as Either
         assertTrue(result.isRight)
         result.shouldBe(Either.Right(mock))
     }
 
     @Test
-    fun `Should return Exception on Either`() {
+    fun `Should return Exception on Either on topMovies`() {
         val mock = Exception("Dummy")
         every {
             topMoviesUseCase.execute(any())
         } returns Single.error(mock)
         viewModel.getTopMovies(1)
-        val result = viewModel.topMoviesLiveData.value as Either
+        val result = viewModel.moviesListLiveData.value as Either
+        assertTrue(result.isLeft)
+        result.shouldBe(Either.Left(mock))
+    }
+
+    @Test
+    fun `Should return movies list on search`() {
+        val mock = createTopRatedMoviesMock()
+        every {
+            searchMoviesUseCase.execute(any())
+        } returns Single.just(mock)
+        viewModel.searchMovie("movie")
+        val result = viewModel.moviesListLiveData.value as Either
+        assertTrue(result.isRight)
+        result.shouldBe(Either.Right(mock))
+    }
+
+    @Test
+    fun `Should return Exception on Either on Movies Search`() {
+        val mock = Exception("Dummy")
+        every {
+            searchMoviesUseCase.execute(any())
+        } returns Single.error(mock)
+        viewModel.searchMovie("")
+        val result = viewModel.moviesListLiveData.value as Either
         assertTrue(result.isLeft)
         result.shouldBe(Either.Left(mock))
     }

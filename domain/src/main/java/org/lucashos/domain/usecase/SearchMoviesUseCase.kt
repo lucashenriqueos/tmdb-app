@@ -6,10 +6,10 @@ import io.reactivex.schedulers.Schedulers
 import org.lucashos.domain.entity.MoviesListBO
 import org.lucashos.domain.repository.MovieRepository
 
-class ListTopMoviesUseCase(private val movieRepository: MovieRepository) :
-    org.lucashos.core.base.BaseUseCase<MoviesListBO, Int> {
-    override fun execute(params: Int): Single<MoviesListBO> {
-        return movieRepository.listTopMovies(params).subscribeOn(Schedulers.io())
+class SearchMoviesUseCase(private val movieRepository: MovieRepository) :
+    org.lucashos.core.base.BaseUseCase<MoviesListBO, String> {
+    override fun execute(params: String): Single<MoviesListBO> {
+        return movieRepository.searchMovies(params).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
 }

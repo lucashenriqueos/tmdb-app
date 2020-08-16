@@ -2,10 +2,12 @@ package org.lucashos.domain.repository
 
 import io.reactivex.Single
 import org.lucashos.domain.entity.MovieDetailBO
-import org.lucashos.domain.entity.TopRatedMoviesBO
+import org.lucashos.domain.entity.MoviesListBO
 
 interface MovieRepository {
-    fun listTopMovies(page: Int): Single<TopRatedMoviesBO>
+    fun listTopMovies(page: Int): Single<MoviesListBO>
+
+    fun searchMovies(title: String): Single<MoviesListBO>
 
     fun getMovieDetail(id: Int): Single<MovieDetailBO>
 
