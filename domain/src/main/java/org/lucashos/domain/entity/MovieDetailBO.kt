@@ -7,5 +7,6 @@ class MovieDetailBO(
     val genres: List<GenreBO>,
     val releaseDate: String,
     val posterPath: String,
-    val rating: Double
+    val rating: Double,
+    var isFavourite: Boolean = false
 )

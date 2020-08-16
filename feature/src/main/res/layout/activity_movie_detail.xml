@@ -29,12 +29,28 @@
             android:textSize="@dimen/large_text"
             android:textStyle="bold" />
 
-        <ImageView
+        <LinearLayout
+            android:id="@+id/ll_movie_detail_favourite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:src="@drawable/ic_baseline_favorite_border_24"
-            android:tint="@color/darkGray" />
+            android:layout_gravity="end">
+
+
+            <ImageView
+                android:id="@+id/iv_movie_detail_not_favourite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_favorite_border_24"
+                android:tint="@color/darkGray" />
+
+            <ImageView
+                android:id="@+id/iv_movie_detail_favourite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:src="@drawable/ic_baseline_favorite_24"
+                android:tint="@color/darkGray" />
+        </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.constraintlayout.widget.ConstraintLayout
