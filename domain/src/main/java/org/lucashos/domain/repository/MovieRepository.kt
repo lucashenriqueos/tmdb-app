@@ -8,4 +8,10 @@ interface MovieRepository {
     fun listTopMovies(page: Int): Single<TopRatedMoviesBO>
 
     fun getMovieDetail(id: Int): Single<MovieDetailBO>
+
+    fun findFavourite(id: Int): Single<Int>
+
+    fun addFavourite(id: Int)
+
+    fun removeFavourite(id: Int)
 }
