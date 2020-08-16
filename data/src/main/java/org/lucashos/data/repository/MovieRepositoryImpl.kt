@@ -23,9 +23,10 @@ class MovieRepositoryImpl(private val apiClient: ApiClient, private val appDatab
     override fun findFavourite(id: Int): Single<Int> =
         appDatabase.movieDao().findFavourite(id)
 
-    override fun addFavourite(id: Int) = appDatabase.movieDao().insert(MovieEntity(id))
+    override fun addFavourite(id: Int): Single<Any> =
+        appDatabase.movieDao().insert(MovieEntity(id)).toSingleDefault(true)
 
-    override fun removeFavourite(id: Int) = appDatabase.movieDao().delete(MovieEntity(id))
+    override fun removeFavourite(id: Int): Single<Int> = appDatabase.movieDao().delete(MovieEntity(id))
 
 
 }

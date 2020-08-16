@@ -11,7 +11,7 @@ interface MovieRepository {
 
     fun findFavourite(id: Int): Single<Int>
 
-    fun addFavourite(id: Int)
+    fun addFavourite(id: Int): Single<Any>
 
-    fun removeFavourite(id: Int)
+    fun removeFavourite(id: Int): Single<Int>
 }
