@@ -1,4 +1,4 @@
-package org.lucashos.feature.topmovies
+package org.lucashos.feature.detail
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import io.kotest.matchers.shouldBe
@@ -13,13 +13,13 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import org.lucashos.domain.usecase.ListTopMoviesUseCase
+import org.lucashos.domain.usecase.GetMovieDetailUseCase
 import org.lucashos.domain.utils.Either
 import org.lucashos.feature.RxImmediateSchedulerRule
-import org.lucashos.feature.model.createTopRatedMoviesMock
+import org.lucashos.feature.model.createMovieDetailMock
 
 @RunWith(JUnit4::class)
-class TopMoviesViewModelTest {
+class MovieDetailViewModelTest {
     @Rule
     @JvmField
     val instantExecutorRule = InstantTaskExecutorRule()
@@ -29,10 +29,10 @@ class TopMoviesViewModelTest {
     var testSchedulerRule = RxImmediateSchedulerRule()
 
     @MockK
-    lateinit var topMoviesUseCase: ListTopMoviesUseCase
+    lateinit var movieDetailUseCase: GetMovieDetailUseCase
 
     @InjectMockKs
-    lateinit var viewModel: TopMoviesViewModel
+    lateinit var viewModel: MovieDetailViewModel
 
     @Before
     fun setup() {
@@ -40,13 +40,13 @@ class TopMoviesViewModelTest {
     }
 
     @Test
-    fun `Should return top rated movies on Either`() {
-        val mock = createTopRatedMoviesMock()
+    fun `Should return movie detail on Either`() {
+        val mock = createMovieDetailMock()
         every {
-            topMoviesUseCase.execute(any())
+            movieDetailUseCase.execute(any())
         } returns Single.just(mock)
-        viewModel.getTopMovies(1)
-        val result = viewModel.topMoviesLiveData.value as Either
+        viewModel.getMovieDetail(1)
+        val result = viewModel.movieDetailLiveData.value as Either
         assertTrue(result.isRight)
         result.shouldBe(Either.Right(mock))
     }
@@ -55,10 +55,10 @@ class TopMoviesViewModelTest {
     fun `Should return Exception on Either`() {
         val mock = Exception("Dummy")
         every {
-            topMoviesUseCase.execute(any())
+            movieDetailUseCase.execute(any())
         } returns Single.error(mock)
-        viewModel.getTopMovies(1)
-        val result = viewModel.topMoviesLiveData.value as Either
+        viewModel.getMovieDetail(1)
+        val result = viewModel.movieDetailLiveData.value as Either
         assertTrue(result.isLeft)
         result.shouldBe(Either.Left(mock))
     }
