@@ -33,9 +33,10 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation deps.core.kotlin
+    implementation deps.core.rxjava
     implementation deps.androidx.androidx_core
     implementation deps.androidx.app_compat
-    implementation deps.androidx.constraint_layout
+    implementation deps.design.picasso
     implementation deps.dagger.dagger
     implementation deps.dagger.dagger_android
     kapt deps.dagger.dagger_compiler
@@ -48,4 +49,5 @@ dependencies {
     implementation project(':data')
     implementation project(':feature')
     implementation project(':core')
+    implementation project(':domain')
 }

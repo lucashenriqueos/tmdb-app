@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="base_url">https://api.themoviedb.org/3/</string>
+    <string name="images_base_url">https://image.tmdb.org/t/p/original/</string>
+    <string name="error_title">Ops, aconteceu um erro</string>
+    <string name="error_message">Não conseguimos concluir a operação</string>
+    <string name="ok">OK</string>
+</resources>
