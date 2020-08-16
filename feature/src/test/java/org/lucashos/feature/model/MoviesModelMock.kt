@@ -3,10 +3,10 @@ package org.lucashos.feature.model
 import org.lucashos.domain.entity.GenreBO
 import org.lucashos.domain.entity.MovieBO
 import org.lucashos.domain.entity.MovieDetailBO
-import org.lucashos.domain.entity.TopRatedMoviesBO
+import org.lucashos.domain.entity.MoviesListBO
 
-fun createTopRatedMoviesMock(): TopRatedMoviesBO {
-    return TopRatedMoviesBO(
+fun createTopRatedMoviesMock(): MoviesListBO {
+    return MoviesListBO(
         page = 1,
         totalPages = 1,
         movies = arrayListOf(

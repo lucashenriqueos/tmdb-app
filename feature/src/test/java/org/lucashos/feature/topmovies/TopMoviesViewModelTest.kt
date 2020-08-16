@@ -46,7 +46,7 @@ class TopMoviesViewModelTest {
             topMoviesUseCase.execute(any())
         } returns Single.just(mock)
         viewModel.getTopMovies(1)
-        val result = viewModel.topMoviesLiveData.value as Either
+        val result = viewModel.moviesLIstLiveData.value as Either
         assertTrue(result.isRight)
         result.shouldBe(Either.Right(mock))
     }
@@ -58,7 +58,7 @@ class TopMoviesViewModelTest {
             topMoviesUseCase.execute(any())
         } returns Single.error(mock)
         viewModel.getTopMovies(1)
-        val result = viewModel.topMoviesLiveData.value as Either
+        val result = viewModel.moviesLIstLiveData.value as Either
         assertTrue(result.isLeft)
         result.shouldBe(Either.Left(mock))
     }

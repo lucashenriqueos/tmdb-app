@@ -5,10 +5,7 @@ import dagger.Provides
 import dagger.android.ContributesAndroidInjector
 import org.lucashos.core.di.CoreModule
 import org.lucashos.domain.repository.MovieRepository
-import org.lucashos.domain.usecase.CheckFavoriteMovieUseCase
-import org.lucashos.domain.usecase.GetMovieDetailUseCase
-import org.lucashos.domain.usecase.ListTopMoviesUseCase
-import org.lucashos.domain.usecase.UpdateFavoriteMovieUseCase
+import org.lucashos.domain.usecase.*
 import org.lucashos.feature.detail.MovieDetailActivity
 import org.lucashos.feature.detail.MovieDetailViewModel
 import org.lucashos.feature.topmovies.TopMoviesActivity
@@ -46,7 +43,14 @@ abstract class FeatureModule {
             UpdateFavoriteMovieUseCase(movieRepository)
 
         @Provides
-        fun providesTopMoviesViewModel(useCase: ListTopMoviesUseCase) = TopMoviesViewModel(useCase)
+        fun provideSearchMoviesUseCase(movieRepository: MovieRepository) =
+            SearchMoviesUseCase(movieRepository)
+
+        @Provides
+        fun providesTopMoviesViewModel(
+            topMoviesUseCase: ListTopMoviesUseCase,
+            searchMoviesUseCase: SearchMoviesUseCase
+        ) = TopMoviesViewModel(topMoviesUseCase, searchMoviesUseCase)
 
         @Provides
         fun providesMovieDetailViewModel(
