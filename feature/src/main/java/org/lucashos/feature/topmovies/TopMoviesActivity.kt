@@ -59,6 +59,6 @@ class TopMoviesActivity : BaseActivity(R.layout.activity_top_movies) {
     }
 
     private fun loadNextPage(page: Int) {
-        topMoviesViewModel.getTopMovies(page)
+        topMoviesViewModel.getTopMovies(page + 1)
     }
 }
