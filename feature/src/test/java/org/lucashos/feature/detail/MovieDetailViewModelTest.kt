@@ -62,4 +62,11 @@ class MovieDetailViewModelTest {
         assertTrue(result.isLeft)
         result.shouldBe(Either.Left(mock))
     }
+
+    @Test
+    fun `Should return Exception on Either when id is lower then 0`() {
+        viewModel.getMovieDetail(-1)
+        val result = viewModel.movieDetailLiveData.value as Either
+        assertTrue(result.isLeft)
+    }
 }
