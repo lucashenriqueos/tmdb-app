@@ -8,7 +8,7 @@ import org.lucashos.domain.entity.TopRatedMoviesBO
 import org.lucashos.domain.repository.MovieRepository
 
 class MovieRepositoryImpl(private val apiClient: ApiClient) : MovieRepository {
-    override fun listTopMovies(): Single<TopRatedMoviesBO> =
+    override fun listTopMovies(page: Int): Single<TopRatedMoviesBO> =
         apiClient.retrofit.create(TmdbApiService::class.java)
-            .getTopMovies().map { TopRatedMoviesMapper.from(it)}
+            .getTopMovies(page).map { TopRatedMoviesMapper.from(it)}
 }

@@ -14,8 +14,8 @@ class TopMoviesViewModel(private val topMoviesUseCase: ListTopMoviesUseCase) : B
     val topMoviesLiveData: LiveData<Either<Throwable, TopRatedMoviesBO>>
         get() = _topMoviesLiveData
 
-    fun getTopMovies() {
-        disposables.add(topMoviesUseCase.execute(Unit).subscribe({
+    fun getTopMovies(page: Int = 0) {
+        disposables.add(topMoviesUseCase.execute(page).subscribe({
             _topMoviesLiveData.value = Either.Right(it)
         }, {
             _topMoviesLiveData.value = Either.Left(it)

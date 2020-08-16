@@ -36,6 +36,7 @@ dependencies {
     implementation deps.core.rxjava
     implementation deps.androidx.androidx_core
     implementation deps.androidx.app_compat
+    implementation deps.design.picasso
     implementation deps.dagger.dagger
     implementation deps.dagger.dagger_android
     kapt deps.dagger.dagger_compiler
