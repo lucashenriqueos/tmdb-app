@@ -15,7 +15,9 @@ ext {
             retrofit_version            : '2.9.0',
             recycler_view_version       : '1.1.0',
             card_view_version           : '1.0.0',
-            picasso_version             : '2.71828'
+            picasso_version             : '2.71828',
+            mockk_version               : '1.10.0',
+            kotest_version              : '4.2.0.RC2'
     ]
 
     deps = [
@@ -59,7 +61,10 @@ ext {
                     xJunit              : "androidx.test.ext:junit:$deps_versions.xjunit_version",
                     espressoCore        : "androidx.test.espresso:espresso-core:$deps_versions.espresso_version",
                     roomTest            : "androidx.room:room-testing:$deps_versions.room_version",
-                    archTest            : "androidx.arch.core:core-testing:$deps_versions.arch_version"
+                    archTest            : "androidx.arch.core:core-testing:$deps_versions.arch_version",
+                    mockk               : "io.mockk:mockk:$deps_versions.mockk_version",
+                    kotest              : "io.kotest:kotest-assertions-core-jvm:$deps_versions.kotest_version",
+                    kotest_arrow        : "io.kotest:kotest-assertions-arrow-jvm:$deps_versions.kotest_version"
             ]
     ]
 

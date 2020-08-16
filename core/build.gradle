@@ -23,12 +23,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation deps.core.kotlin
     implementation deps.core.rxjava
+    implementation deps.core.rxandroid
     implementation deps.androidx.app_compat
     implementation deps.androidx.androidx_core
     implementation deps.design.picasso

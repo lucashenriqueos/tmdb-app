@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_top_movies.*
 import org.lucashos.core.base.BaseActivity
+import org.lucashos.core.dialog.ErrorDialog
 import org.lucashos.domain.entity.MovieBO
 import org.lucashos.domain.entity.TopRatedMoviesBO
 import org.lucashos.feature.R
@@ -36,10 +37,6 @@ class TopMoviesActivity : BaseActivity(R.layout.activity_top_movies) {
 
     private fun handleMovieSuccess(topRatedMovies: TopRatedMoviesBO) {
         movies.addAll(topRatedMovies.movies)
-        rv_movies_list.adapter = TopMoviesAdapter(
-            movies,
-            picasso
-        )
         (rv_movies_list.adapter as TopMoviesAdapter).notifyDataSetChanged()
     }
 
@@ -52,11 +49,13 @@ class TopMoviesActivity : BaseActivity(R.layout.activity_top_movies) {
                 loadNextPage(page)
             }
         })
+        rv_movies_list.adapter = TopMoviesAdapter(
+            movies,
+            picasso
+        )
     }
 
-    private fun handleMovieError(error: Throwable) {
-        error.printStackTrace()
-    }
+    private fun handleMovieError(error: Throwable) = ErrorDialog(this).showDialog()
 
     private fun loadNextPage(page: Int) {
         topMoviesViewModel.getTopMovies(page + 1)
