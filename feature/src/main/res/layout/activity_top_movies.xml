@@ -10,7 +10,6 @@
         android:id="@+id/title_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:paddingBottom="@dimen/large_padding"
         android:paddingTop="@dimen/medium_padding"
