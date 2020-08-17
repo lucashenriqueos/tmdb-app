@@ -10,9 +10,7 @@ object MovieMapper : BaseMapper<MovieResponse, MovieBO> {
         title = from.title,
         rating = from.rating,
         releaseDate = from.releaseDate,
-        posterPath = from.posterPath,
-        overview = from.overview,
-        genres = from.genres
+        posterPath = from.posterPath
     )
 
     override fun to(to: MovieBO): MovieResponse {

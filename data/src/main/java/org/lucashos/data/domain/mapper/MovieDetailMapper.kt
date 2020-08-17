@@ -11,8 +11,7 @@ object MovieDetailMapper : BaseMapper<MovieDetailResponse, MovieDetailBO> {
         rating = from.rating,
         releaseDate = from.releaseDate,
         posterPath = from.posterPath,
-        overview = from.overview,
-        genres = GenreMapper.fromList(from.genres)
+        overview = from.overview
     )
 
     override fun to(to: MovieDetailBO): MovieDetailResponse {

@@ -29,6 +29,8 @@ class TopMoviesActivity : BaseActivity(R.layout.activity_top_movies) {
 
     var searchTitle = ""
 
+    var totalPages = 0
+
     var movies: ArrayList<MovieBO> = arrayListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,7 +54,7 @@ class TopMoviesActivity : BaseActivity(R.layout.activity_top_movies) {
         }
 
         et_search.setOnEditorActionListener { v, actionId, _ ->
-            if(actionId == EditorInfo.IME_ACTION_SEARCH){
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 searchTitle = v.text.toString()
                 resetMoviesListState()
                 performSearch(searchTitle)
@@ -84,6 +86,7 @@ class TopMoviesActivity : BaseActivity(R.layout.activity_top_movies) {
     }
 
     private fun handleMovieSuccess(moviesList: MoviesListBO) {
+        totalPages = moviesList.totalPages
         movies.addAll(moviesList.movies)
         (rv_movies_list.adapter as TopMoviesAdapter).notifyDataSetChanged()
     }
@@ -91,7 +94,7 @@ class TopMoviesActivity : BaseActivity(R.layout.activity_top_movies) {
     private fun setupRecyclerView() {
         val layoutManager = LinearLayoutManager(this)
         rv_movies_list.layoutManager = layoutManager
-         scrollListener = object :
+        scrollListener = object :
             EndlessRecyclerViewScrollListener(layoutManager) {
             override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
                 loadNextPage(page)
@@ -109,6 +112,7 @@ class TopMoviesActivity : BaseActivity(R.layout.activity_top_movies) {
     private fun handleMovieError(error: Throwable) = ErrorDialog(this).showDialog()
 
     private fun loadNextPage(page: Int) {
+        if (page > totalPages) return
         if (searchTitle.isEmpty())
             topMoviesViewModel.getTopMovies(page + 1)
         else
