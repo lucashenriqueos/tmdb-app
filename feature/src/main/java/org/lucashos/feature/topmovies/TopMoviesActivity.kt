@@ -33,9 +33,48 @@ class TopMoviesActivity : BaseActivity(R.layout.activity_top_movies) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setupSearch()
         setupRecyclerView()
         initObservers()
         topMoviesViewModel.getTopMovies()
+    }
+
+    private fun setupSearch() {
+        iv_search.setOnClickListener {
+            toggleHeader(headerVisible = false)
+        }
+
+        iv_close.setOnClickListener {
+            toggleHeader(headerVisible = true)
+            if (et_search.text.toString().isNotEmpty() && searchTitle.isNotEmpty()) {
+                resetSearch()
+            }
+        }
+
+        et_search.setOnEditorActionListener { v, actionId, _ ->
+            if(actionId == EditorInfo.IME_ACTION_SEARCH){
+                searchTitle = v.text.toString()
+                resetMoviesListState()
+                performSearch(searchTitle)
+                return@setOnEditorActionListener true
+            }
+            return@setOnEditorActionListener false
+        }
+
+    }
+
+    private fun toggleHeader(headerVisible: Boolean) {
+        if (headerVisible) {
+            ll_search.gone()
+            ll_header.visible()
+        } else {
+            ll_search.visible()
+            ll_header.gone()
+        }
+    }
+
+    private fun performSearch(title: String, page: Int = 1) {
+        topMoviesViewModel.searchMovie(title, page)
     }
 
     private fun initObservers() {
