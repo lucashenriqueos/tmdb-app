@@ -18,6 +18,7 @@ import org.lucashos.domain.usecase.SearchMoviesUseCase
 import org.lucashos.domain.utils.Either
 import org.lucashos.feature.RxImmediateSchedulerRule
 import org.lucashos.feature.model.createTopRatedMoviesMock
+import org.lucashos.feature.model.getDummyException
 
 @RunWith(JUnit4::class)
 class TopMoviesViewModelTest {
@@ -57,7 +58,7 @@ class TopMoviesViewModelTest {
 
     @Test
     fun `Should return Exception on Either on topMovies`() {
-        val mock = Exception("Dummy")
+        val mock = getDummyException()
         every {
             topMoviesUseCase.execute(any())
         } returns Single.error(mock)
@@ -73,7 +74,7 @@ class TopMoviesViewModelTest {
         every {
             searchMoviesUseCase.execute(any())
         } returns Single.just(mock)
-        viewModel.searchMovie("movie")
+        viewModel.searchMovie("movie", 1)
         val result = viewModel.moviesListLiveData.value as Either
         assertTrue(result.isRight)
         result.shouldBe(Either.Right(mock))
@@ -81,11 +82,11 @@ class TopMoviesViewModelTest {
 
     @Test
     fun `Should return Exception on Either on Movies Search`() {
-        val mock = Exception("Dummy")
+        val mock = getDummyException()
         every {
             searchMoviesUseCase.execute(any())
         } returns Single.error(mock)
-        viewModel.searchMovie("")
+        viewModel.searchMovie("", 1)
         val result = viewModel.moviesListLiveData.value as Either
         assertTrue(result.isLeft)
         result.shouldBe(Either.Left(mock))

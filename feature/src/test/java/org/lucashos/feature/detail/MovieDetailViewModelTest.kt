@@ -17,6 +17,7 @@ import org.lucashos.domain.usecase.GetMovieDetailUseCase
 import org.lucashos.domain.utils.Either
 import org.lucashos.feature.RxImmediateSchedulerRule
 import org.lucashos.feature.model.createMovieDetailMock
+import org.lucashos.feature.model.getDummyException
 
 @RunWith(JUnit4::class)
 class MovieDetailViewModelTest {
@@ -53,7 +54,7 @@ class MovieDetailViewModelTest {
 
     @Test
     fun `Should return Exception on Either`() {
-        val mock = Exception("Dummy")
+        val mock = getDummyException()
         every {
             movieDetailUseCase.execute(any())
         } returns Single.error(mock)
