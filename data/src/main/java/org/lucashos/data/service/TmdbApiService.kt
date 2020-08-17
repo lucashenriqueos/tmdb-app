@@ -15,5 +15,5 @@ interface TmdbApiService {
     fun getMovie(@Path("id") id: Int): Single<MovieDetailResponse>
 
     @GET("search/movie")
-    fun searchMovies(@Query("query") title: String): Single<MoviesListResponse>
+    fun searchMovies(@Query("query") title: String, @Query("page") page: Int): Single<MoviesListResponse>
 }

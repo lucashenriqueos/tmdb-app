@@ -2,7 +2,6 @@ package org.lucashos.feature.topmovies
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -10,6 +9,8 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_top_movies.*
 import org.lucashos.core.base.BaseActivity
 import org.lucashos.core.dialog.ErrorDialog
+import org.lucashos.core.extension.gone
+import org.lucashos.core.extension.visible
 import org.lucashos.domain.entity.MovieBO
 import org.lucashos.domain.entity.MoviesListBO
 import org.lucashos.feature.R
@@ -79,5 +80,17 @@ class TopMoviesActivity : BaseActivity(R.layout.activity_top_movies) {
         val intent = Intent(this, MovieDetailActivity::class.java)
         intent.putExtra(MovieDetailActivity.MOVIE_ID_EXTRA, movie.id)
         startActivity(intent)
+    }
+
+    private fun resetSearch() {
+        et_search.text.clear()
+        resetMoviesListState()
+        searchTitle = ""
+        topMoviesViewModel.getTopMovies()
+    }
+
+    private fun resetMoviesListState() {
+        scrollListener.resetState()
+        movies.clear()
     }
 }

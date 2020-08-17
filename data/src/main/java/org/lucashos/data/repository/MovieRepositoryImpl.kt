@@ -16,9 +16,9 @@ class MovieRepositoryImpl(private val apiClient: ApiClient, private val appDatab
         apiClient.retrofit.create(TmdbApiService::class.java)
             .getTopMovies(page).map { MoviesListMapper.from(it)}
 
-    override fun searchMovies(title: String): Single<MoviesListBO> =
+    override fun searchMovies(title: String, page: Int): Single<MoviesListBO> =
         apiClient.retrofit.create(TmdbApiService::class.java)
-            .searchMovies(title).map { MoviesListMapper.from(it)}
+            .searchMovies(title, page).map { MoviesListMapper.from(it)}
 
     override fun getMovieDetail(id: Int): Single<MovieDetailBO> =
         apiClient.retrofit.create(TmdbApiService::class.java)

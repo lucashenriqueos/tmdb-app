@@ -1,3 +1,4 @@
 <resources>
     <string name="application_name">The Movie APP</string>
+    <string name="unkown_release_date">Data desconhecida</string>
 </resources>

@@ -7,7 +7,7 @@ import org.lucashos.domain.entity.MoviesListBO
 interface MovieRepository {
     fun listTopMovies(page: Int): Single<MoviesListBO>
 
-    fun searchMovies(title: String): Single<MoviesListBO>
+    fun searchMovies(title: String, page: Int): Single<MoviesListBO>
 
     fun getMovieDetail(id: Int): Single<MovieDetailBO>
 
