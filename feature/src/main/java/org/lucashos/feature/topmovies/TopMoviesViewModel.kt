@@ -26,10 +26,11 @@ class TopMoviesViewModel(
         }))
     }
 
-    fun searchMovie(title: String) {
-        disposables.add(searchMoviesUseCase.execute(title).subscribe({
+    fun searchMovie(title: String, page: Int) {
+        disposables.add(searchMoviesUseCase.execute(SearchMoviesUseCase.Params(title, page)).subscribe({
             _movieListLiveData.value = Either.Right(it)
         }, {
+            it.printStackTrace()
             _movieListLiveData.value = Either.Left(it)
         }))
     }
