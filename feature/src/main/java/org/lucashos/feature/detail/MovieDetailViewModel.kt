@@ -4,13 +4,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import org.lucashos.core.base.BaseViewModel
 import org.lucashos.domain.entity.MovieDetailBO
+import org.lucashos.domain.entity.MoviesListBO
 import org.lucashos.domain.usecase.GetMovieDetailUseCase
+import org.lucashos.domain.usecase.GetSimilarMoviesUseCase
 import org.lucashos.domain.usecase.UpdateFavoriteMovieUseCase
 import org.lucashos.domain.utils.Either
 
 class MovieDetailViewModel(
     private val getMovieDetailUseCase: GetMovieDetailUseCase,
-    private val updateFavouriteUseCase: UpdateFavoriteMovieUseCase
+    private val updateFavouriteUseCase: UpdateFavoriteMovieUseCase,
+    private val similarMoviesUseCase: GetSimilarMoviesUseCase
 ) : BaseViewModel() {
     private val _movieDetailLiveData: MutableLiveData<Either<Throwable, MovieDetailBO>> =
         MutableLiveData()
@@ -23,6 +26,12 @@ class MovieDetailViewModel(
 
     val movieFavouriteLiveData: LiveData<Either<Throwable, Boolean>>
         get() = _movieFavouriteLiveData
+
+    private val _similarMoviesLiveData: MutableLiveData<Either<Throwable, MoviesListBO>> =
+        MutableLiveData()
+
+    val similarMoviesLiveData: LiveData<Either<Throwable, MoviesListBO>>
+        get() = _similarMoviesLiveData
 
     fun getMovieDetail(id: Int) {
         if (id < 0)
@@ -43,11 +52,26 @@ class MovieDetailViewModel(
                     movie.isFavourite
                 )
             ).subscribe({
+                movie.isFavourite = it
                 _movieFavouriteLiveData.value = Either.Right(it)
             }, {
                 _movieFavouriteLiveData.value = Either.Left(it)
             })
         )
+    }
+
+    fun getSimilarTitles(id: Int) {
+        if (id < 0)
+            _similarMoviesLiveData.value = Either.Left(Exception())
+        else
+            disposables.add(
+                similarMoviesUseCase.execute(id)
+                    .subscribe({
+                        _similarMoviesLiveData.value = Either.Right(it)
+                    }, {
+                        _similarMoviesLiveData.value = Either.Left(it)
+                    })
+            )
     }
 
 }

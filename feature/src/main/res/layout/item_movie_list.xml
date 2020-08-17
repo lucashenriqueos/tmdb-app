@@ -71,7 +71,8 @@
                 app:layout_constraintStart_toEndOf="@id/iv_item_rating"
                 app:layout_constraintTop_toTopOf="@id/iv_item_rating"
                 app:layout_constraintBottom_toBottomOf="@id/iv_item_rating"
-                tools:text="@string/application_name" />
+                tools:text="@string/application_name"
+                tools:listitem="@layout/item_related_movies"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

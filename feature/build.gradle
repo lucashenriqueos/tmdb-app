@@ -36,6 +36,7 @@ dependencies {
     implementation deps.design.recycler_view
     implementation deps.design.card_view
     implementation deps.design.picasso
+    implementation deps.design.material
     implementation deps.dagger.dagger
     implementation deps.dagger.dagger_android
     kapt deps.dagger.dagger_compiler

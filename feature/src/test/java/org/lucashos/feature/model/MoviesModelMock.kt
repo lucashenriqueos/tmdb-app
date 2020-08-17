@@ -5,7 +5,7 @@ import org.lucashos.domain.entity.MovieBO
 import org.lucashos.domain.entity.MovieDetailBO
 import org.lucashos.domain.entity.MoviesListBO
 
-fun createTopRatedMoviesMock(): MoviesListBO = MoviesListBO(
+fun createMoviesListMock(): MoviesListBO = MoviesListBO(
         page = 1,
         totalPages = 1,
         movies = arrayListOf(
@@ -21,14 +21,15 @@ fun createTopRatedMoviesMock(): MoviesListBO = MoviesListBO(
         )
     )
 
-fun createMovieDetailMock(): MovieDetailBO = MovieDetailBO(
+fun createMovieDetailMock(isFavourite: Boolean = true): MovieDetailBO = MovieDetailBO(
                 id = 1,
                 title = "Mocky",
                 releaseDate = "2019-10-10",
                 genres = arrayListOf(createGenreBOMock()),
                 overview = "This is a mocky film",
                 posterPath = "/mocky.jpg",
-                rating = 8.0
+                rating = 8.0,
+                isFavourite = isFavourite
             )
 
 fun createGenreBOMock(): GenreBO = GenreBO(

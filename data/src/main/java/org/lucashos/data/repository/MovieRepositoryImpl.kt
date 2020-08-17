@@ -20,6 +20,10 @@ class MovieRepositoryImpl(private val apiClient: ApiClient, private val appDatab
         apiClient.retrofit.create(TmdbApiService::class.java)
             .searchMovies(title, page).map { MoviesListMapper.from(it)}
 
+    override fun getSimilarMovies(id: Int): Single<MoviesListBO> =
+        apiClient.retrofit.create(TmdbApiService::class.java)
+            .getSimilarMovies(id).map { MoviesListMapper.from(it)}
+
     override fun getMovieDetail(id: Int): Single<MovieDetailBO> =
         apiClient.retrofit.create(TmdbApiService::class.java)
             .getMovie(id).map { MovieDetailMapper.from(it)}

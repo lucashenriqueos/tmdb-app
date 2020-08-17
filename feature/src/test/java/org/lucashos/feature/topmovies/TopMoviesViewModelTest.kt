@@ -17,7 +17,7 @@ import org.lucashos.domain.usecase.ListTopMoviesUseCase
 import org.lucashos.domain.usecase.SearchMoviesUseCase
 import org.lucashos.domain.utils.Either
 import org.lucashos.feature.RxImmediateSchedulerRule
-import org.lucashos.feature.model.createTopRatedMoviesMock
+import org.lucashos.feature.model.createMoviesListMock
 import org.lucashos.feature.model.getDummyException
 
 @RunWith(JUnit4::class)
@@ -46,7 +46,7 @@ class TopMoviesViewModelTest {
 
     @Test
     fun `Should return top rated movies`() {
-        val mock = createTopRatedMoviesMock()
+        val mock = createMoviesListMock()
         every {
             topMoviesUseCase.execute(any())
         } returns Single.just(mock)
@@ -70,7 +70,7 @@ class TopMoviesViewModelTest {
 
     @Test
     fun `Should return movies list on search`() {
-        val mock = createTopRatedMoviesMock()
+        val mock = createMoviesListMock()
         every {
             searchMoviesUseCase.execute(any())
         } returns Single.just(mock)

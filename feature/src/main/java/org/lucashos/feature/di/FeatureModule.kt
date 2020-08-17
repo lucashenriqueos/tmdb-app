@@ -28,6 +28,10 @@ abstract class FeatureModule {
             ListTopMoviesUseCase(movieRepository)
 
         @Provides
+        fun provideGetSimilarMoviesUseCase(movieRepository: MovieRepository) =
+            GetSimilarMoviesUseCase(movieRepository)
+
+        @Provides
         fun provideGetMovieDetailUseCase(
             movieRepository: MovieRepository,
             checkFavouriteUseCase: CheckFavoriteMovieUseCase
@@ -55,8 +59,13 @@ abstract class FeatureModule {
         @Provides
         fun providesMovieDetailViewModel(
             getMovieDetailUseCase: GetMovieDetailUseCase,
-            updateFavouriteUseCase: UpdateFavoriteMovieUseCase
-        ) = MovieDetailViewModel(getMovieDetailUseCase, updateFavouriteUseCase)
+            updateFavouriteUseCase: UpdateFavoriteMovieUseCase,
+            similarMoviesUseCase: GetSimilarMoviesUseCase
+        ) = MovieDetailViewModel(
+            getMovieDetailUseCase,
+            updateFavouriteUseCase,
+            similarMoviesUseCase
+        )
     }
 
 }
