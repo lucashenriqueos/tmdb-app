@@ -74,8 +74,7 @@ class MovieDetailActivity : BaseActivity(R.layout.activity_movie_detail) {
     }
 
     private fun hideSimilarTitles() {
-        tv_similar_titles.gone()
-        rv_movie_detail_related.gone()
+        ll__movie_detail_related.gone()
     }
 
     fun handleError(error: Throwable) {
