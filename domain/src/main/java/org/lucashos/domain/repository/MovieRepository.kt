@@ -11,6 +11,8 @@ interface MovieRepository {
 
     fun getMovieDetail(id: Int): Single<MovieDetailBO>
 
+    fun getSimilarMovies(id: Int): Single<MoviesListBO>
+
     fun findFavourite(id: Int): Single<Int>
 
     fun addFavourite(id: Int): Single<Any>

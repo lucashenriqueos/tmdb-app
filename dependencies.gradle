@@ -17,7 +17,8 @@ ext {
             card_view_version           : '1.0.0',
             picasso_version             : '2.71828',
             mockk_version               : '1.10.0',
-            kotest_version              : '4.2.0.RC2'
+            kotest_version              : '4.2.0.RC2',
+            material_version            : '1.2.0'
     ]
 
     deps = [
@@ -37,7 +38,8 @@ ext {
                     recycler_view       : "androidx.recyclerview:recyclerview:$deps_versions.recycler_view_version",
                     constraint_layout   : "androidx.constraintlayout:constraintlayout:$deps_versions.constraintlayout_version",
                     card_view           : "androidx.cardview:cardview:$deps_versions.card_view_version",
-                    picasso             : "com.squareup.picasso:picasso:$deps_versions.picasso_version"
+                    picasso             : "com.squareup.picasso:picasso:$deps_versions.picasso_version",
+                    material            : "com.google.android.material:material:$deps_versions.material_version"
             ],
             dagger  : [
                     dagger              : "com.google.dagger:dagger:$deps_versions.dagger_version",

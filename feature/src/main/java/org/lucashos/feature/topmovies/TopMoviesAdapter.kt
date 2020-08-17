@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import io.reactivex.subjects.PublishSubject
-import kotlinx.android.synthetic.main.rv_movie_list.view.*
+import kotlinx.android.synthetic.main.item_movie_list.view.*
 import org.lucashos.core.extension.toDateFormat
 import org.lucashos.domain.entity.MovieBO
 import org.lucashos.feature.R
@@ -18,7 +18,7 @@ class TopMoviesAdapter(private val moviesList: List<MovieBO>, private val picass
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopMoviesViewHolder {
         val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.rv_movie_list, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.item_movie_list, parent, false)
         return TopMoviesViewHolder(view, picasso)
     }
 

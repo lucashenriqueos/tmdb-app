@@ -15,6 +15,7 @@
         android:paddingTop="@dimen/medium_padding"
         android:paddingEnd="@dimen/medium_padding"
         android:paddingStart="@dimen/medium_padding"
+        android:background="@color/colorPrimaryDark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -31,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/application_name"
                 android:textSize="@dimen/large_text"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/darkGray"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -41,7 +42,7 @@
                 android:id="@+id/iv_search"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:tint="@color/colorPrimaryDark"
+                android:tint="@color/darkGray"
                 android:src="@drawable/ic_baseline_search_24"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
@@ -72,7 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_baseline_close_24"
-                android:tint="@color/colorPrimaryDark"
+                android:tint="@color/darkGray"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -88,5 +89,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title_toolbar"
         tools:itemCount="10"
-        tools:listitem="@layout/rv_movie_list" />
+        tools:listitem="@layout/item_movie_list" />
 </androidx.constraintlayout.widget.ConstraintLayout>
