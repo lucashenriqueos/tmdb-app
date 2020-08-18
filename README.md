@@ -1,5 +1,5 @@
 # The Movie DB Application
-![build](https://github.com/actions/tmdb-app/workflows/build/badge.svg)
+![build](https://github.com/lucashenriqueos/tmdb-app/workflows/build/badge.svg)
 
 Android application for movies synopsis using The Movie DB APIs
 
