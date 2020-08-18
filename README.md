@@ -24,7 +24,7 @@ There's some TODO's yet:
   - Test reports, probably [JaCoCo](https://github.com/jacoco/jacoco) will be used;
   
 #### Continuous Integration
-For the Continuous Integration, was used Github Actions, that is triggered on every Push and Pull Request and can be checked at the above badge.
+For the Continuous Integration, was used [Github Actions](https://github.com/lucashenriqueos/tmdb-app/actions), that is triggered on every Push and Pull Request and can be checked at the above badge.
 
 #### Follow-Up
-Checkout project Workflow for follow-up
+Checkout [Project Workflow](https://github.com/lucashenriqueos/tmdb-app/projects/1) for follow-up
