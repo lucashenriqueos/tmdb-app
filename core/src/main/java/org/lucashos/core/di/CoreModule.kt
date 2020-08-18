@@ -19,6 +19,6 @@ class CoreModule {
     fun providesPicasso(context: Context, apiClient: ApiClient): Picasso = Picasso.Builder(context)
         .downloader(OkHttp3Downloader(apiClient.httpClient))
         .loggingEnabled(true)
-        .listener { picasso, uri, exception -> exception.printStackTrace() }
+        .listener { _, _, exception -> exception.printStackTrace() }
         .build()
 }
