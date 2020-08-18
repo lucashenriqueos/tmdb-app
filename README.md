@@ -4,7 +4,7 @@
 Android application for movies synopsis using The Movie DB APIs
 
 #### Architecture
- - For the application architectural design was used a modular approach of Clean Architecture;
+ - For the application architectural design was used a modular approach of [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html);
     * Some of referrences used in this project:
       * [Github - Android CleanArchitecture](https://github.com/android10/Android-CleanArchitecture-Kotlin)
       * [Medium - Clean Architecture para android (PT-BR)](https://medium.com/android-dev-br/clean-architecture-para-android-eb492513263e)
