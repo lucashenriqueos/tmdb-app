@@ -1,10 +1,16 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.0"
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 
     defaultConfig {
         applicationId "org.lucashos.tmdb"
@@ -27,10 +33,24 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation deps.core.kotlin
-    implementation deps.androidx.androidXCore
-    implementation deps.androidx.appCompat
-    implementation deps.androidx.constraintLayout
+    implementation deps.core.rxjava
+    implementation deps.androidx.androidx_core
+    implementation deps.androidx.app_compat
+    implementation deps.design.picasso
+    implementation deps.room.room
+    implementation deps.room.room_compiler
+    implementation deps.room.room_rxjava
+    implementation deps.dagger.dagger
+    implementation deps.dagger.dagger_android
+    kapt deps.dagger.dagger_compiler
+    kapt deps.dagger.dagger_processor
     testImplementation deps.test.junit
     androidTestImplementation deps.test.xJunit
     androidTestImplementation deps.test.espressoCore
+
+    // Modules dependencies
+    implementation project(':data')
+    implementation project(':feature')
+    implementation project(':core')
+    implementation project(':domain')
 }

@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/title_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="?attr/actionBarSize"
+                android:paddingStart="@dimen/medium_padding"
+                android:paddingTop="@dimen/medium_padding"
+                android:paddingEnd="@dimen/medium_padding"
+                android:paddingBottom="@dimen/large_padding"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/application_name"
+                    android:textColor="@color/darkGray"
+                    android:textSize="@dimen/large_text"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/ll_movie_detail_favourite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end">
+
+
+                    <ImageView
+                        android:id="@+id/iv_movie_detail_not_favourite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_baseline_favorite_border_24"
+                        android:tint="@color/darkGray" />
+
+                    <ImageView
+                        android:id="@+id/iv_movie_detail_favourite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:src="@drawable/ic_baseline_favorite_24"
+                        android:tint="@color/darkGray" />
+                </LinearLayout>
+            </androidx.appcompat.widget.Toolbar>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ll_movie_detail_folder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/large_padding"
+                android:paddingBottom="@dimen/medium_padding"
+                android:background="@color/colorAccent"
+                app:layout_constraintEnd_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title_toolbar">
+
+                <ImageView
+                    android:id="@+id/iv_movie_detail_folder"
+                    android:layout_width="@dimen/folder_width"
+                    android:layout_height="@dimen/folder_height"
+                    android:layout_marginTop="@dimen/large_padding"
+                    android:layout_marginBottom="@dimen/medium_padding"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    tools:srcCompat="@drawable/ic_baseline_movie_24"
+                    tools:tint="@color/colorPrimaryDark" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/tv_movie_detail_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/large_padding"
+                android:layout_marginEnd="@dimen/large_padding"
+                android:layout_marginTop="@dimen/large_padding"
+                android:textColor="@color/darkGray"
+                android:textSize="@dimen/large_text"
+                android:textStyle="bold"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/tv_movie_detail_rating"
+                app:layout_constraintTop_toBottomOf="@id/ll_movie_detail_folder"
+                tools:text="Mocky II" />
+
+            <TextView
+                android:id="@+id/tv_movie_detail_release_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/large_padding"
+                android:textColor="@color/darkGray"
+                android:textSize="@dimen/medium_text_size"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_movie_detail_title"
+                tools:text="07/02/1976" />
+
+            <TextView
+                android:id="@+id/tv_movie_detail_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/darkGray"
+                android:textSize="@dimen/large_text"
+                app:layout_constraintTop_toTopOf="@id/tv_movie_detail_title"
+                app:layout_constraintEnd_toStartOf="@id/tv_movie_detail_rating_img"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                tools:text="8.1" />
+
+            <ImageView
+                android:id="@+id/tv_movie_detail_rating_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/large_padding"
+                android:src="@drawable/ic_baseline_star_24"
+                android:tint="@color/darkGray"
+                app:layout_constraintBottom_toBottomOf="@id/tv_movie_detail_rating"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintTop_toTopOf="@id/tv_movie_detail_rating" />
+
+            <TextView
+                android:id="@+id/tv_movie_detail_overview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/large_padding"
+                android:layout_marginTop="@dimen/medium_padding"
+                android:layout_marginEnd="@dimen/large_padding"
+                android:textColor="@color/darkGray"
+                app:layout_constraintTop_toBottomOf="@id/tv_movie_detail_release_date"
+                tools:text="A small-time boxer gets a supremely rare chance to fight a heavy-weight champion in a bout in which he strives to go the distance for his self-respect." />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ll__movie_detail_related"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/tiny_padding"
+                android:paddingBottom="@dimen/tiny_padding"
+                android:layout_marginTop="@dimen/large_padding"
+                android:background="@color/colorAccent"
+                app:layout_constraintEnd_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_movie_detail_overview"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <TextView
+                    android:id="@+id/tv_similar_titles"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/darkGray"
+                    android:textStyle="bold"
+                    android:text="@string/similar_titles"
+                    android:layout_marginTop="@dimen/medium_padding"
+                    android:layout_marginStart="@dimen/large_padding"
+                    android:layout_marginEnd="@dimen/large_padding"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_movie_detail_related"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/medium_padding"
+                    android:layout_marginBottom="@dimen/medium_padding"
+                    android:layout_marginEnd="@dimen/large_padding"
+                    android:layout_marginStart="@dimen/large_padding"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_similar_titles"
+                    tools:listitem="@layout/item_related_movies"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

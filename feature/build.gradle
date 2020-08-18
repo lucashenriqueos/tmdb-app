@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 30
@@ -26,11 +27,27 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.3.0'
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation deps.core.kotlin
+    implementation deps.core.rxjava
+    implementation deps.core.rxandroid
+    implementation deps.androidx.androidx_core
+    implementation deps.androidx.app_compat
+    implementation deps.design.constraint_layout
+    implementation deps.design.recycler_view
+    implementation deps.design.card_view
+    implementation deps.design.picasso
+    implementation deps.design.material
+    implementation deps.dagger.dagger
+    implementation deps.dagger.dagger_android
+    kapt deps.dagger.dagger_compiler
+    kapt deps.dagger.dagger_processor
+    testImplementation deps.test.junit
+    testImplementation deps.test.mockk
+    testImplementation deps.test.archTest
+    testImplementation deps.test.kotest
+    testImplementation deps.test.kotest_arrow
+    androidTestImplementation deps.test.xJunit
 
+    implementation project(":domain")
+    implementation project(":core")
 }

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/large_padding"
+        android:layout_marginEnd="@dimen/medium_padding"
+        android:layout_marginStart="@dimen/medium_padding"
+        app:cardBackgroundColor="@color/lightGray"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="@dimen/medium_padding"
+            android:paddingEnd="@dimen/medium_padding">
+
+            <ImageView
+                android:id="@+id/iv_item_movie_folder"
+                android:layout_width="@dimen/folder_thumbnail_width"
+                android:layout_height="@dimen/folder_thumbnail_height"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:src="@drawable/ic_baseline_movie_24" />
+
+            <TextView
+                android:id="@+id/tv_item_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/large_padding"
+                android:layout_marginStart="@dimen/large_padding"
+                android:textSize="@dimen/medium_text_size"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/iv_item_movie_folder"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/application_name" />
+
+            <TextView
+                android:id="@+id/tv_item_release_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_padding"
+                android:layout_marginStart="@dimen/large_padding"
+                app:layout_constraintStart_toEndOf="@id/iv_item_movie_folder"
+                app:layout_constraintTop_toBottomOf="@+id/tv_item_title"
+                tools:text="@string/application_name" />
+
+            <ImageView
+                android:id="@+id/iv_item_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_padding"
+                android:layout_marginStart="@dimen/large_padding"
+                android:tint="@color/colorPrimaryDark"
+                android:src="@drawable/ic_baseline_star_24"
+                app:layout_constraintStart_toEndOf="@id/iv_item_movie_folder"
+                app:layout_constraintTop_toBottomOf="@id/tv_item_release_date"/>
+
+            <TextView
+                android:id="@+id/tv_item_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/tiny_padding"
+                app:layout_constraintStart_toEndOf="@id/iv_item_rating"
+                app:layout_constraintTop_toTopOf="@id/iv_item_rating"
+                app:layout_constraintBottom_toBottomOf="@id/iv_item_rating"
+                tools:text="@string/application_name"
+                tools:listitem="@layout/item_related_movies"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
