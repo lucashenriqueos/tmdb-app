@@ -10,8 +10,9 @@ Android application for movies synopsis using The Movie DB APIs
       * [Medium - Clean Architecture para android (PT-BR)](https://medium.com/android-dev-br/clean-architecture-para-android-eb492513263e)
     
  - Model-View-ViewModel (MVVM) Pattern;
- - LiveData, for its lifecycle awareness;
- - RxJava to handle asynchronisms at service communications;
+ - [LiveData](https://developer.android.com/topic/libraries/architecture/livedata), for its lifecycle awareness;
+ - [RxJava](https://github.com/ReactiveX/RxJava) to handle asynchronisms at service communications;
+ - [Dagger](https://github.com/google/dagger) for depedency injection;
  
 #### Tests
 To run unit tests: ./gradlew tests
