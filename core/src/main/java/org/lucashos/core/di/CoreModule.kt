@@ -1,15 +1,11 @@
 package org.lucashos.core.di
 
-import android.content.Context
-import dagger.Module
-import dagger.Provides
-import org.lucashos.core.R
+import org.koin.dsl.module
 import org.lucashos.core.api.ApiClient
+import org.lucashos.core.baseUrl
 
-@Module
-class CoreModule {
-
-    @Provides
-    fun providesApiClient(context: Context): ApiClient =
-        ApiClient(context.getString(R.string.base_url))
+val coreKoinModule = module {
+    single {
+        ApiClient(baseUrl)
+    }
 }

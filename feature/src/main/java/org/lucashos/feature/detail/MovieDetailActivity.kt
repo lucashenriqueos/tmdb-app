@@ -5,21 +5,26 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_movie_detail.*
+import org.koin.android.ext.android.inject
 import org.lucashos.core.base.BaseActivity
 import org.lucashos.core.dialog.ErrorDialog
 import org.lucashos.core.extension.gone
+import org.lucashos.core.extension.imageUrl
 import org.lucashos.core.extension.toDateFormat
 import org.lucashos.core.extension.visible
+import org.lucashos.core.imagesBaseUrl
 import org.lucashos.domain.entity.MovieBO
 import org.lucashos.domain.entity.MovieDetailBO
 import org.lucashos.domain.entity.MoviesListBO
 import org.lucashos.feature.R
-import javax.inject.Inject
+import org.lucashos.feature.di.featureKoinModule
 
-class MovieDetailActivity : BaseActivity(R.layout.activity_movie_detail) {
+class MovieDetailActivity : BaseActivity(
+    layoutId = R.layout.activity_movie_detail,
+    injectorModule = featureKoinModule
+) {
 
-    @Inject
-    lateinit var viewModel: MovieDetailViewModel
+    private val viewModel: MovieDetailViewModel by inject()
 
     lateinit var movie: MovieDetailBO
 
@@ -90,7 +95,7 @@ class MovieDetailActivity : BaseActivity(R.layout.activity_movie_detail) {
 
         movie.posterPath?.let {
             Glide.with(this)
-                .load("${getString(R.string.images_base_url)}${it.substring(1)}")
+                .load(imagesBaseUrl.imageUrl(it))
                 .into(iv_movie_detail_folder)
         }
     }

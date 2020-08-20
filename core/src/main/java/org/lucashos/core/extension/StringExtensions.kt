@@ -13,3 +13,5 @@ fun String.toDateFormat(): String? =
                 targetFormat.format(it)
             }.toString()
         }
+
+fun String.imageUrl(imgPath: String) = "$this${imgPath.substring(1)}"

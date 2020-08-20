@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.item_related_movies.view.*
+import org.lucashos.core.extension.imageUrl
+import org.lucashos.core.imagesBaseUrl
 import org.lucashos.domain.entity.MovieBO
 import org.lucashos.feature.R
 
@@ -35,7 +37,7 @@ class RelatedMoviesAdapter(private val moviesList: List<MovieBO>) :
         ) {
             movie.posterPath?.let {
                 Glide.with(itemView)
-                    .load("${itemView.context.getString(R.string.images_base_url)}${it.substring(1)}")
+                    .load(imagesBaseUrl.imageUrl(it))
                     .into(itemView.iv_related_movie_thumb)
             }
             itemView.tv_related_movie_title.text = movie.title

@@ -7,7 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.item_movie_list.view.*
+import org.lucashos.core.extension.imageUrl
 import org.lucashos.core.extension.toDateFormat
+import org.lucashos.core.imagesBaseUrl
 import org.lucashos.domain.entity.MovieBO
 import org.lucashos.feature.R
 
@@ -36,11 +38,12 @@ class TopMoviesAdapter(private val moviesList: List<MovieBO>) :
         ) {
             movie.posterPath?.let {
                 Glide.with(itemView)
-                    .load("${itemView.context.getString(R.string.images_base_url)}${it.substring(1)}")
+                    .load(imagesBaseUrl.imageUrl(it))
                     .into(itemView.iv_item_movie_folder)
             }
             itemView.tv_item_title.text = movie.title
-            itemView.tv_item_release_date.text = movie.releaseDate?.toDateFormat() ?: itemView.context.getString(R.string.unkown_release_date)
+            itemView.tv_item_release_date.text = movie.releaseDate?.toDateFormat()
+                ?: itemView.context.getString(R.string.unkown_release_date)
             itemView.tv_item_rating.text = movie.rating.toString()
             itemView.setOnClickListener {
                 onClick.onNext(movie)

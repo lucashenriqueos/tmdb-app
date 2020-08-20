@@ -20,7 +20,8 @@ ext {
             kotest_version              : '4.2.0.RC2',
             material_version            : '1.2.0',
             glide_version               : '4.11.0',
-            jacoco_version              : '0.8.1'
+            jacoco_version              : '0.8.1',
+            koin_version                : '2.1.6'
     ]
 
     deps = [
@@ -41,13 +42,10 @@ ext {
                     constraint_layout   : "androidx.constraintlayout:constraintlayout:$deps_versions.constraintlayout_version",
                     card_view           : "androidx.cardview:cardview:$deps_versions.card_view_version",
                     material            : "com.google.android.material:material:$deps_versions.material_version",
-                    glide              : "com.github.bumptech.glide:glide:$deps_versions.glide_version"
+                    glide               : "com.github.bumptech.glide:glide:$deps_versions.glide_version"
             ],
-            dagger  : [
-                    dagger              : "com.google.dagger:dagger:$deps_versions.dagger_version",
-                    dagger_android      : "com.google.dagger:dagger-android:$deps_versions.dagger_version",
-                    dagger_compiler     : "com.google.dagger:dagger-compiler:$deps_versions.dagger_version",
-                    dagger_processor    : "com.google.dagger:dagger-android-processor:$deps_versions.dagger_version",
+            di  : [
+                    koin                : "org.koin:koin-android:$deps_versions.koin_version"
             ],
             retrofit: [
                     retrofit            : "com.squareup.retrofit2:retrofit:$deps_versions.retrofit_version",

@@ -29,9 +29,7 @@ dependencies {
     implementation deps.core.kotlin
     implementation deps.core.rxjava
     implementation deps.core.rxandroid
-    implementation deps.androidx.androidx_core
     testImplementation deps.test.junit
-    androidTestImplementation deps.test.xJunit
 
     implementation project(":core")
 }

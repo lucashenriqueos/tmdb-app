@@ -36,10 +36,7 @@ dependencies {
     implementation deps.core.rxandroid
     implementation deps.androidx.app_compat
     implementation deps.androidx.androidx_core
-    implementation deps.dagger.dagger
-    implementation deps.dagger.dagger_android
-    kapt deps.dagger.dagger_compiler
-    kapt deps.dagger.dagger_processor
+    implementation deps.di.koin
     implementation deps.retrofit.retrofit
     implementation deps.retrofit.retrofit_adapter
     implementation deps.retrofit.retrofit_gson

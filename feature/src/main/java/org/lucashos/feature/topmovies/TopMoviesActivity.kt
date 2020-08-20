@@ -6,6 +6,7 @@ import android.view.inputmethod.EditorInfo
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_top_movies.*
+import org.koin.android.ext.android.inject
 import org.lucashos.core.base.BaseActivity
 import org.lucashos.core.dialog.ErrorDialog
 import org.lucashos.core.extension.gone
@@ -14,12 +15,14 @@ import org.lucashos.domain.entity.MovieBO
 import org.lucashos.domain.entity.MoviesListBO
 import org.lucashos.feature.R
 import org.lucashos.feature.detail.MovieDetailActivity
-import javax.inject.Inject
+import org.lucashos.feature.di.featureKoinModule
 
-class TopMoviesActivity : BaseActivity(R.layout.activity_top_movies) {
+class TopMoviesActivity : BaseActivity(
+    layoutId = R.layout.activity_top_movies,
+    injectorModule = featureKoinModule
+) {
 
-    @Inject
-    lateinit var topMoviesViewModel: TopMoviesViewModel
+    private val topMoviesViewModel: TopMoviesViewModel by inject()
 
     lateinit var scrollListener: EndlessRecyclerViewScrollListener
 
