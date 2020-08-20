@@ -4,14 +4,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
+import com.bumptech.glide.Glide
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.item_movie_list.view.*
 import org.lucashos.core.extension.toDateFormat
 import org.lucashos.domain.entity.MovieBO
 import org.lucashos.feature.R
 
-class TopMoviesAdapter(private val moviesList: List<MovieBO>, private val picasso: Picasso) :
+class TopMoviesAdapter(private val moviesList: List<MovieBO>) :
     RecyclerView.Adapter<TopMoviesAdapter.TopMoviesViewHolder>() {
 
     val onClick: PublishSubject<MovieBO> = PublishSubject.create()
@@ -19,7 +19,7 @@ class TopMoviesAdapter(private val moviesList: List<MovieBO>, private val picass
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopMoviesViewHolder {
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.item_movie_list, parent, false)
-        return TopMoviesViewHolder(view, picasso)
+        return TopMoviesViewHolder(view)
     }
 
     override fun getItemCount(): Int = moviesList.size
@@ -28,17 +28,15 @@ class TopMoviesAdapter(private val moviesList: List<MovieBO>, private val picass
         holder.bind(moviesList[position], onClick)
     }
 
-    class TopMoviesViewHolder(itemView: View, private val picasso: Picasso) :
+    class TopMoviesViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
         fun bind(
             movie: MovieBO,
             onClick: PublishSubject<MovieBO>
         ) {
             movie.posterPath?.let {
-                picasso
+                Glide.with(itemView)
                     .load("${itemView.context.getString(R.string.images_base_url)}${it.substring(1)}")
-                    .fit()
-                    .centerCrop()
                     .into(itemView.iv_item_movie_folder)
             }
             itemView.tv_item_title.text = movie.title

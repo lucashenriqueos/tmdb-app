@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_top_movies.*
 import org.lucashos.core.base.BaseActivity
 import org.lucashos.core.dialog.ErrorDialog
@@ -21,9 +20,6 @@ class TopMoviesActivity : BaseActivity(R.layout.activity_top_movies) {
 
     @Inject
     lateinit var topMoviesViewModel: TopMoviesViewModel
-
-    @Inject
-    lateinit var picasso: Picasso
 
     lateinit var scrollListener: EndlessRecyclerViewScrollListener
 
@@ -101,10 +97,7 @@ class TopMoviesActivity : BaseActivity(R.layout.activity_top_movies) {
             }
         }
         rv_movies_list.addOnScrollListener(scrollListener)
-        val adapter = TopMoviesAdapter(
-            movies,
-            picasso
-        )
+        val adapter = TopMoviesAdapter(movies)
         rv_movies_list.adapter = adapter
         adapter.onClick.subscribe(::loadMovieDetails)
     }

@@ -3,7 +3,7 @@ package org.lucashos.feature.detail
 import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.squareup.picasso.Picasso
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_movie_detail.*
 import org.lucashos.core.base.BaseActivity
 import org.lucashos.core.dialog.ErrorDialog
@@ -20,9 +20,6 @@ class MovieDetailActivity : BaseActivity(R.layout.activity_movie_detail) {
 
     @Inject
     lateinit var viewModel: MovieDetailViewModel
-
-    @Inject
-    lateinit var picasso: Picasso
 
     lateinit var movie: MovieDetailBO
 
@@ -64,7 +61,7 @@ class MovieDetailActivity : BaseActivity(R.layout.activity_movie_detail) {
     private fun handleSimilarMoviesSuccess(moviesListBO: MoviesListBO) {
         if (moviesListBO.movies.isEmpty())
             hideSimilarTitles()
-        val adapter = RelatedMoviesAdapter(moviesListBO.movies, picasso)
+        val adapter = RelatedMoviesAdapter(moviesListBO.movies)
         rv_movie_detail_related.adapter = adapter
         adapter.onClick.subscribe(::loadMovieDetails)
     }
@@ -92,10 +89,8 @@ class MovieDetailActivity : BaseActivity(R.layout.activity_movie_detail) {
         toggleFavourite(movie.isFavourite)
 
         movie.posterPath?.let {
-            picasso
+            Glide.with(this)
                 .load("${getString(R.string.images_base_url)}${it.substring(1)}")
-                .fit()
-                .centerCrop()
                 .into(iv_movie_detail_folder)
         }
     }

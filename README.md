@@ -15,12 +15,12 @@ Android application for movies synopsis using The Movie DB APIs
  - [Dagger](https://github.com/google/dagger) for depedency injection;
  
 #### Tests
-To run unit tests: ./gradlew tests
+To run unit tests: ./gradlew tests and ./gradlew jacocoFullReport
   - JUnit for testing application;
   - [Mockk](https://mockk.io/) for mocking purposes
   - [Kotest](https://github.com/kotest/kotest) for assertion helpers
   - [JaCoCo](https://github.com/jacoco/jacoco) is configured to deliver a unified report for code coverage;
-        * [Sample](https://github.com/esafirm/pokedroid/blob/master/gradle/jacoco.gradle)
+    * [Sample](https://github.com/esafirm/pokedroid/blob/master/gradle/jacoco.gradle)
   
 There's some TODO's yet:
   - UI Tests;

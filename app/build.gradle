@@ -36,7 +36,6 @@ dependencies {
     implementation deps.core.rxjava
     implementation deps.androidx.androidx_core
     implementation deps.androidx.app_compat
-    implementation deps.design.picasso
     implementation deps.room.room
     implementation deps.room.room_compiler
     implementation deps.room.room_rxjava
