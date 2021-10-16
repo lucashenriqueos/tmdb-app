@@ -48,7 +48,7 @@
 
             <ImageView
                 android:id="@+id/iv_movie_detail_folder"
-                android:layout_width="@dimen/folder_width"
+                android:layout_width="wrap_content"
                 android:layout_height="@dimen/folder_height"
                 android:layout_marginTop="@dimen/spacing_large"
                 android:layout_marginBottom="@dimen/spacing_medium"

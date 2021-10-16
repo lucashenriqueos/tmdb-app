@@ -30,7 +30,7 @@
     <dimen name="card_radius_small">8dp</dimen>
 
     <dimen name="folder_height">240dp</dimen>
-    <dimen name="folder_width">150dp</dimen>
-    <dimen name="folder_thumbnail_height">120dp</dimen>
+    <dimen name="folder_thumbnail_height">240dp</dimen>
+    <dimen name="movie_item_width">192dp</dimen>
 
 </resources>
