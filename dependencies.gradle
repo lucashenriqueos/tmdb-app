@@ -13,6 +13,7 @@ ext {
             rxjava_version              : '2.2.19',
             rxandroid_version           : '2.1.1',
             retrofit_version            : '2.9.0',
+            gson_version                : '2.8.8',
             recycler_view_version       : '1.1.0',
             card_view_version           : '1.0.0',
             picasso_version             : '2.71828',
@@ -52,7 +53,8 @@ ext {
             retrofit: [
                     retrofit            : "com.squareup.retrofit2:retrofit:$deps_versions.retrofit_version",
                     retrofit_adapter    : "com.squareup.retrofit2:adapter-rxjava2:$deps_versions.retrofit_version",
-                    retrofit_gson       : "com.squareup.retrofit2:converter-gson:$deps_versions.retrofit_version"
+                    retrofit_gson       : "com.squareup.retrofit2:converter-gson:$deps_versions.retrofit_version",
+                    gson                : "com.google.code.gson:gson:$deps_versions.gson_version"
 
             ],
             room    : [

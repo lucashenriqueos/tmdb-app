@@ -26,6 +26,8 @@ android {
 }
 
 dependencies {
+    kapt deps.dagger.dagger_compiler
+    kapt deps.dagger.dagger_processor
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation deps.core.kotlin
     implementation deps.core.rxjava
@@ -35,14 +37,12 @@ dependencies {
     implementation deps.design.constraint_layout
     implementation deps.design.recycler_view
     implementation deps.design.card_view
-    implementation (deps.design.glide) {
-        exclude group: "com.android.support"
-    }
     implementation deps.design.material
     implementation deps.dagger.dagger
     implementation deps.dagger.dagger_android
-    kapt deps.dagger.dagger_compiler
-    kapt deps.dagger.dagger_processor
+    implementation (deps.design.glide) {
+        exclude group: "com.android.support"
+    }
     testImplementation deps.test.junit
     testImplementation deps.test.mockk
     testImplementation deps.test.archTest

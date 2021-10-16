@@ -13,3 +13,5 @@ fun String.toDateFormat(): String? =
                 targetFormat.format(it)
             }.toString()
         }
+
+fun String?.orElse(default: String): CharSequence = this ?: default

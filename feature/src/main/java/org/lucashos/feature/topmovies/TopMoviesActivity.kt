@@ -1,15 +1,12 @@
 package org.lucashos.feature.topmovies
 
-import android.content.Intent
 import android.os.Bundle
-import android.view.inputmethod.EditorInfo
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.activity_top_movies.*
+import kotlinx.android.synthetic.main.activity_top_movies.rv_movies_list
 import org.lucashos.core.base.BaseActivity
 import org.lucashos.core.dialog.ErrorDialog
-import org.lucashos.core.extension.gone
-import org.lucashos.core.extension.visible
 import org.lucashos.domain.entity.MovieBO
 import org.lucashos.domain.entity.MoviesListBO
 import org.lucashos.feature.R
@@ -23,56 +20,15 @@ class TopMoviesActivity : BaseActivity(R.layout.activity_top_movies) {
 
     lateinit var scrollListener: EndlessRecyclerViewScrollListener
 
-    var searchTitle = ""
-
     var totalPages = 0
 
     var movies: ArrayList<MovieBO> = arrayListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setupSearch()
         setupRecyclerView()
         initObservers()
         topMoviesViewModel.getTopMovies()
-    }
-
-    private fun setupSearch() {
-        iv_search.setOnClickListener {
-            toggleHeader(headerVisible = false)
-        }
-
-        iv_close.setOnClickListener {
-            toggleHeader(headerVisible = true)
-            if (et_search.text.toString().isNotEmpty() && searchTitle.isNotEmpty()) {
-                resetSearch()
-            }
-        }
-
-        et_search.setOnEditorActionListener { v, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                searchTitle = v.text.toString()
-                resetMoviesListState()
-                performSearch(searchTitle)
-                return@setOnEditorActionListener true
-            }
-            return@setOnEditorActionListener false
-        }
-
-    }
-
-    private fun toggleHeader(headerVisible: Boolean) {
-        if (headerVisible) {
-            ll_search.gone()
-            ll_header.visible()
-        } else {
-            ll_search.visible()
-            ll_header.gone()
-        }
-    }
-
-    private fun performSearch(title: String, page: Int = 1) {
-        topMoviesViewModel.searchMovie(title, page)
     }
 
     private fun initObservers() {
@@ -82,9 +38,10 @@ class TopMoviesActivity : BaseActivity(R.layout.activity_top_movies) {
     }
 
     private fun handleMovieSuccess(moviesList: MoviesListBO) {
+        val startSize = movies.size
         totalPages = moviesList.totalPages
         movies.addAll(moviesList.movies)
-        (rv_movies_list.adapter as TopMoviesAdapter).notifyDataSetChanged()
+        (rv_movies_list.adapter as TopMoviesAdapter).notifyItemRangeChanged(startSize, movies.size)
     }
 
     private fun setupRecyclerView() {
@@ -97,36 +54,19 @@ class TopMoviesActivity : BaseActivity(R.layout.activity_top_movies) {
             }
         }
         rv_movies_list.addOnScrollListener(scrollListener)
-        val adapter = TopMoviesAdapter(movies)
+        val adapter = TopMoviesAdapter(movies) {
+            goToMovieDetails(it)
+        }
+        rv_movies_list.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
         rv_movies_list.adapter = adapter
-        adapter.onClick.subscribe(::loadMovieDetails)
     }
 
     private fun handleMovieError(error: Throwable) = ErrorDialog(this).showDialog()
 
     private fun loadNextPage(page: Int) {
         if (page > totalPages) return
-        if (searchTitle.isEmpty())
-            topMoviesViewModel.getTopMovies(page + 1)
-        else
-            performSearch(searchTitle, page + 1)
+        topMoviesViewModel.getTopMovies(page + 1)
     }
 
-    fun loadMovieDetails(movie: MovieBO) {
-        val intent = Intent(this, MovieDetailActivity::class.java)
-        intent.putExtra(MovieDetailActivity.MOVIE_ID_EXTRA, movie.id)
-        startActivity(intent)
-    }
-
-    private fun resetSearch() {
-        et_search.text.clear()
-        resetMoviesListState()
-        searchTitle = ""
-        topMoviesViewModel.getTopMovies()
-    }
-
-    private fun resetMoviesListState() {
-        scrollListener.resetState()
-        movies.clear()
-    }
+    private fun goToMovieDetails(movie: MovieBO) = startActivity(MovieDetailActivity.getStartIntent(this, movie.id))
 }

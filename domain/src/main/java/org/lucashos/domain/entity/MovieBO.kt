@@ -1,7 +1,7 @@
 package org.lucashos.domain.entity
 
 class MovieBO(
-    val id: Int,
+    val id: Long,
     val title: String?,
     val releaseDate: String?,
     val posterPath: String?,

@@ -9,13 +9,13 @@ interface MovieRepository {
 
     fun searchMovies(title: String, page: Int): Single<MoviesListBO>
 
-    fun getMovieDetail(id: Int): Single<MovieDetailBO>
+    fun getMovieDetail(id: Long): Single<MovieDetailBO>
 
-    fun getSimilarMovies(id: Int): Single<MoviesListBO>
+    fun getSimilarMovies(id: Long): Single<MoviesListBO>
 
-    fun findFavourite(id: Int): Single<Int>
+    fun findFavourite(id: Long): Single<Int>
 
-    fun addFavourite(id: Int): Single<Any>
+    fun addFavourite(id: Long): Single<Any>
 
-    fun removeFavourite(id: Int): Single<Int>
+    fun removeFavourite(id: Long): Single<Int>
 }

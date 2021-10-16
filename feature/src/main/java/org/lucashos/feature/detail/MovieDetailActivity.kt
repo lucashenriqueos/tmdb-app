@@ -1,15 +1,22 @@
 package org.lucashos.feature.detail
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.activity_movie_detail.*
+import kotlinx.android.synthetic.main.activity_movie_detail.ctv_movie_detail_favourite
+import kotlinx.android.synthetic.main.activity_movie_detail.iv_movie_detail_folder
+import kotlinx.android.synthetic.main.activity_movie_detail.rv_movie_detail_related
+import kotlinx.android.synthetic.main.activity_movie_detail.tv_movie_detail_overview
+import kotlinx.android.synthetic.main.activity_movie_detail.tv_movie_detail_rating
+import kotlinx.android.synthetic.main.activity_movie_detail.tv_movie_detail_release_date
+import kotlinx.android.synthetic.main.activity_movie_detail.tv_similar_titles
+import kotlinx.android.synthetic.main.activity_movie_detail.tv_title
 import org.lucashos.core.base.BaseActivity
 import org.lucashos.core.dialog.ErrorDialog
 import org.lucashos.core.extension.gone
+import org.lucashos.core.extension.loadImage
 import org.lucashos.core.extension.toDateFormat
-import org.lucashos.core.extension.visible
 import org.lucashos.domain.entity.MovieBO
 import org.lucashos.domain.entity.MovieDetailBO
 import org.lucashos.domain.entity.MoviesListBO
@@ -25,7 +32,7 @@ class MovieDetailActivity : BaseActivity(R.layout.activity_movie_detail) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val movieId = intent.getIntExtra(MOVIE_ID_EXTRA, -1)
+        val movieId = intent.getLongExtra(MOVIE_ID_EXTRA, -1)
         initObservers()
         initViews()
         setupRecyclerView()
@@ -38,15 +45,20 @@ class MovieDetailActivity : BaseActivity(R.layout.activity_movie_detail) {
         rv_movie_detail_related.layoutManager = layoutManager
     }
 
-    fun initViews() {
-        ll_movie_detail_favourite.setOnClickListener {
+    private fun initViews() {
+        ctv_movie_detail_favourite.setOnClickListener {
             viewModel.updateFavourite(movie)
         }
     }
 
-    fun initObservers() {
-        viewModel.movieDetailLiveData.observe({ lifecycle }, {
-            it.fold(::handleError, ::handleSuccess)
+    private fun initObservers() {
+        viewModel.movieDetailLiveData.observe({ lifecycle }, { state ->
+            when (state) {
+                is MovieDetailState.DetailsLoaded -> handleSuccess(state.movie)
+                is MovieDetailState.Error -> handleError(state.error)
+                is MovieDetailState.EmptyList -> {
+                }
+            }
         })
 
         viewModel.movieFavouriteLiveData.observe({ lifecycle }, {
@@ -61,9 +73,10 @@ class MovieDetailActivity : BaseActivity(R.layout.activity_movie_detail) {
     private fun handleSimilarMoviesSuccess(moviesListBO: MoviesListBO) {
         if (moviesListBO.movies.isEmpty())
             hideSimilarTitles()
-        val adapter = RelatedMoviesAdapter(moviesListBO.movies)
+        val adapter = RelatedMoviesAdapter(moviesListBO.movies) {
+            goToMovieDetails(it)
+        }
         rv_movie_detail_related.adapter = adapter
-        adapter.onClick.subscribe(::loadMovieDetails)
     }
 
     private fun handleSimilarMoviesError(throwable: Throwable) {
@@ -71,16 +84,17 @@ class MovieDetailActivity : BaseActivity(R.layout.activity_movie_detail) {
     }
 
     private fun hideSimilarTitles() {
-        ll__movie_detail_related.gone()
+        rv_movie_detail_related.gone()
+        tv_similar_titles.gone()
     }
 
-    fun handleError(error: Throwable) {
+    private fun handleError(error: Throwable?) {
         ErrorDialog(this).showDialog()
     }
 
-    fun handleSuccess(movie: MovieDetailBO) {
+    private fun handleSuccess(movie: MovieDetailBO) {
         this.movie = movie
-        tv_movie_detail_title.text = movie.title
+        tv_title.text = movie.title
         tv_movie_detail_release_date.text =
             movie.releaseDate?.toDateFormat() ?: getString(R.string.unkown_release_date)
         tv_movie_detail_rating.text = movie.rating.toString()
@@ -88,30 +102,20 @@ class MovieDetailActivity : BaseActivity(R.layout.activity_movie_detail) {
 
         toggleFavourite(movie.isFavourite)
 
-        movie.posterPath?.let {
-            Glide.with(this)
-                .load("${getString(R.string.images_base_url)}${it.substring(1)}")
-                .into(iv_movie_detail_folder)
-        }
+        iv_movie_detail_folder loadImage getString(R.string.images_base_url, movie.posterPath)
     }
 
     private fun toggleFavourite(isFav: Boolean) {
-        if (isFav) {
-            iv_movie_detail_favourite.visible()
-            iv_movie_detail_not_favourite.gone()
-        } else {
-            iv_movie_detail_favourite.gone()
-            iv_movie_detail_not_favourite.visible()
-        }
+        ctv_movie_detail_favourite.isChecked = isFav
     }
 
-    fun loadMovieDetails(movie: MovieBO) {
-        val intent = Intent(this, MovieDetailActivity::class.java)
-        intent.putExtra(MovieDetailActivity.MOVIE_ID_EXTRA, movie.id)
-        startActivity(intent)
-    }
+    private fun goToMovieDetails(movie: MovieBO) = startActivity(getStartIntent(this, movie.id))
 
     companion object {
-        val MOVIE_ID_EXTRA = "MOVIE_ID_EXTRA"
+        private const val MOVIE_ID_EXTRA = "MOVIE_ID_EXTRA"
+
+        fun getStartIntent(context: Context, movieId: Long) = Intent(context, MovieDetailActivity::class.java).apply {
+            putExtra(MOVIE_ID_EXTRA, movieId)
+        }
     }
 }

@@ -4,37 +4,36 @@ import io.reactivex.Single
 import org.lucashos.core.api.ApiClient
 import org.lucashos.data.db.AppDatabase
 import org.lucashos.data.domain.entity.MovieEntity
-import org.lucashos.data.domain.mapper.MovieDetailMapper
-import org.lucashos.data.domain.mapper.MoviesListMapper
 import org.lucashos.data.service.TmdbApiService
 import org.lucashos.domain.entity.MovieDetailBO
 import org.lucashos.domain.entity.MoviesListBO
 import org.lucashos.domain.repository.MovieRepository
 
 class MovieRepositoryImpl(private val apiClient: ApiClient, private val appDatabase: AppDatabase) : MovieRepository {
+
     override fun listTopMovies(page: Int): Single<MoviesListBO> =
         apiClient.retrofit.create(TmdbApiService::class.java)
-            .getTopMovies(page).map { MoviesListMapper.from(it)}
+            .getTopMovies(page).map { it.toBO() }
 
     override fun searchMovies(title: String, page: Int): Single<MoviesListBO> =
         apiClient.retrofit.create(TmdbApiService::class.java)
-            .searchMovies(title, page).map { MoviesListMapper.from(it)}
+            .searchMovies(title, page).map { it.toBO() }
 
-    override fun getSimilarMovies(id: Int): Single<MoviesListBO> =
+    override fun getSimilarMovies(id: Long): Single<MoviesListBO> =
         apiClient.retrofit.create(TmdbApiService::class.java)
-            .getSimilarMovies(id).map { MoviesListMapper.from(it)}
+            .getSimilarMovies(id).map { it.toBO() }
 
-    override fun getMovieDetail(id: Int): Single<MovieDetailBO> =
+    override fun getMovieDetail(id: Long): Single<MovieDetailBO> =
         apiClient.retrofit.create(TmdbApiService::class.java)
-            .getMovie(id).map { MovieDetailMapper.from(it)}
+            .getMovie(id).map { it.toBO() }
 
-    override fun findFavourite(id: Int): Single<Int> =
+    override fun findFavourite(id: Long): Single<Int> =
         appDatabase.movieDao().findFavourite(id)
 
-    override fun addFavourite(id: Int): Single<Any> =
+    override fun addFavourite(id: Long): Single<Any> =
         appDatabase.movieDao().insert(MovieEntity(id)).toSingleDefault(true)
 
-    override fun removeFavourite(id: Int): Single<Int> = appDatabase.movieDao().delete(MovieEntity(id))
+    override fun removeFavourite(id: Long): Single<Int> = appDatabase.movieDao().delete(MovieEntity(id))
 
 
 }

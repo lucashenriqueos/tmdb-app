@@ -3,6 +3,7 @@ package org.lucashos.feature.detail
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import org.lucashos.core.base.BaseViewModel
+import org.lucashos.domain.entity.MovieBO
 import org.lucashos.domain.entity.MovieDetailBO
 import org.lucashos.domain.entity.MoviesListBO
 import org.lucashos.domain.usecase.GetMovieDetailUseCase
@@ -15,10 +16,10 @@ class MovieDetailViewModel(
     private val updateFavouriteUseCase: UpdateFavoriteMovieUseCase,
     private val similarMoviesUseCase: GetSimilarMoviesUseCase
 ) : BaseViewModel() {
-    private val _movieDetailLiveData: MutableLiveData<Either<Throwable, MovieDetailBO>> =
+    private val _movieDetailLiveData: MutableLiveData<ViewStates> =
         MutableLiveData()
 
-    val movieDetailLiveData: LiveData<Either<Throwable, MovieDetailBO>>
+    val movieDetailLiveData: LiveData<ViewStates>
         get() = _movieDetailLiveData
 
     private val _movieFavouriteLiveData: MutableLiveData<Either<Throwable, Boolean>> =
@@ -33,14 +34,14 @@ class MovieDetailViewModel(
     val similarMoviesLiveData: LiveData<Either<Throwable, MoviesListBO>>
         get() = _similarMoviesLiveData
 
-    fun getMovieDetail(id: Int) {
+    fun getMovieDetail(id: Long) {
         if (id < 0)
-            _movieDetailLiveData.value = Either.Left(Exception())
+            _movieDetailLiveData.postValue(MovieDetailState.EmptyList)
         else
             disposables.add(getMovieDetailUseCase.execute(id).subscribe({
-                _movieDetailLiveData.value = Either.Right(it)
+                _movieDetailLiveData.postValue(MovieDetailState.DetailsLoaded(it))
             }, {
-                _movieDetailLiveData.value = Either.Left(it)
+                _movieDetailLiveData.postValue(MovieDetailState.Error(it))
             }))
     }
 
@@ -60,7 +61,7 @@ class MovieDetailViewModel(
         )
     }
 
-    fun getSimilarTitles(id: Int) {
+    fun getSimilarTitles(id: Long) {
         if (id < 0)
             _similarMoviesLiveData.value = Either.Left(Exception())
         else
@@ -73,5 +74,15 @@ class MovieDetailViewModel(
                     })
             )
     }
+}
 
+interface ViewStates
+
+object SimilarMoviesState: ViewStates {
+}
+
+sealed class MovieDetailState: ViewStates {
+    data class DetailsLoaded(val movie: MovieDetailBO): MovieDetailState()
+    data class Error(val error: Throwable?): ViewStates
+    object EmptyList: MovieDetailState()
 }

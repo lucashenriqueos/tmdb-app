@@ -4,17 +4,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import io.reactivex.subjects.PublishSubject
-import kotlinx.android.synthetic.main.item_movie_list.view.*
+import kotlinx.android.synthetic.main.item_movie_list.view.iv_item_movie_folder
+import kotlinx.android.synthetic.main.item_movie_list.view.tv_item_rating
+import kotlinx.android.synthetic.main.item_movie_list.view.tv_item_release_date
+import kotlinx.android.synthetic.main.item_movie_list.view.tv_item_title
+import org.lucashos.core.extension.loadImage
+import org.lucashos.core.extension.orElse
 import org.lucashos.core.extension.toDateFormat
 import org.lucashos.domain.entity.MovieBO
 import org.lucashos.feature.R
 
-class TopMoviesAdapter(private val moviesList: List<MovieBO>) :
+class TopMoviesAdapter(private val moviesList: List<MovieBO>, private val onClick: (MovieBO) -> Unit) :
     RecyclerView.Adapter<TopMoviesAdapter.TopMoviesViewHolder>() {
-
-    val onClick: PublishSubject<MovieBO> = PublishSubject.create()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopMoviesViewHolder {
         val view =
@@ -32,19 +33,19 @@ class TopMoviesAdapter(private val moviesList: List<MovieBO>) :
         RecyclerView.ViewHolder(itemView) {
         fun bind(
             movie: MovieBO,
-            onClick: PublishSubject<MovieBO>
+            onClick: (MovieBO) -> Unit
         ) {
-            movie.posterPath?.let {
-                Glide.with(itemView)
-                    .load("${itemView.context.getString(R.string.images_base_url)}${it.substring(1)}")
-                    .into(itemView.iv_item_movie_folder)
-            }
-            itemView.tv_item_title.text = movie.title
-            itemView.tv_item_release_date.text = movie.releaseDate?.toDateFormat() ?: itemView.context.getString(R.string.unkown_release_date)
-            itemView.tv_item_rating.text = movie.rating.toString()
-            itemView.setOnClickListener {
-                onClick.onNext(movie)
+            with(itemView) {
+                iv_item_movie_folder loadImage context.getString(R.string.images_base_url, movie.posterPath)
+                tv_item_title.text = movie.title
+                tv_item_rating.text = movie.rating.toString()
+                tv_item_release_date.text = movie.releaseDate?.toDateFormat()
+                    .orElse(context.getString(R.string.unkown_release_date))
+                setOnClickListener {
+                    onClick(movie)
+                }
             }
         }
     }
 }
+

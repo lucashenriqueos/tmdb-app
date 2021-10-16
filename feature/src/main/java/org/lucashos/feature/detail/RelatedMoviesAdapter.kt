@@ -4,16 +4,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import io.reactivex.subjects.PublishSubject
-import kotlinx.android.synthetic.main.item_related_movies.view.*
+import kotlinx.android.synthetic.main.item_related_movies.view.iv_related_movie_thumb
+import kotlinx.android.synthetic.main.item_related_movies.view.tv_related_movie_title
+import org.lucashos.core.extension.loadImage
 import org.lucashos.domain.entity.MovieBO
 import org.lucashos.feature.R
 
-class RelatedMoviesAdapter(private val moviesList: List<MovieBO>) :
+class RelatedMoviesAdapter(private val moviesList: List<MovieBO>, private val onClick: (MovieBO) -> Unit) :
     RecyclerView.Adapter<RelatedMoviesAdapter.RelatedMoviesViewHolder>() {
-
-    val onClick: PublishSubject<MovieBO> = PublishSubject.create()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RelatedMoviesViewHolder {
         val view =
@@ -31,16 +29,14 @@ class RelatedMoviesAdapter(private val moviesList: List<MovieBO>) :
         RecyclerView.ViewHolder(itemView) {
         fun bind(
             movie: MovieBO,
-            onClick: PublishSubject<MovieBO>
+            onClick: (MovieBO) -> Unit
         ) {
-            movie.posterPath?.let {
-                Glide.with(itemView)
-                    .load("${itemView.context.getString(R.string.images_base_url)}${it.substring(1)}")
-                    .into(itemView.iv_related_movie_thumb)
-            }
-            itemView.tv_related_movie_title.text = movie.title
-            itemView.setOnClickListener {
-                onClick.onNext(movie)
+            with(itemView) {
+                iv_related_movie_thumb loadImage context.getString(R.string.images_base_url, movie.posterPath)
+                tv_related_movie_title.text = movie.title
+                setOnClickListener {
+                    onClick(movie)
+                }
             }
         }
     }

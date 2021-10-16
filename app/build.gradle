@@ -31,6 +31,8 @@ android {
 }
 
 dependencies {
+    kapt deps.dagger.dagger_compiler
+    kapt deps.dagger.dagger_processor
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation deps.core.kotlin
     implementation deps.core.rxjava
@@ -41,8 +43,6 @@ dependencies {
     implementation deps.room.room_rxjava
     implementation deps.dagger.dagger
     implementation deps.dagger.dagger_android
-    kapt deps.dagger.dagger_compiler
-    kapt deps.dagger.dagger_processor
     testImplementation deps.test.junit
     androidTestImplementation deps.test.xJunit
     androidTestImplementation deps.test.espressoCore
