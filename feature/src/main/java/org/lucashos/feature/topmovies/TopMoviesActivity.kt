@@ -45,20 +45,24 @@ class TopMoviesActivity : BaseActivity(R.layout.activity_top_movies) {
     }
 
     private fun setupRecyclerView() {
-        val layoutManager = LinearLayoutManager(this)
-        rv_movies_list.layoutManager = layoutManager
-        scrollListener = object :
-            EndlessRecyclerViewScrollListener(layoutManager) {
-            override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
-                loadNextPage(page)
+        with (rv_movies_list) {
+            val linearLayoutManager = LinearLayoutManager(this@TopMoviesActivity, RecyclerView.HORIZONTAL, false)
+
+            layoutManager = linearLayoutManager
+
+            scrollListener = object :
+                EndlessRecyclerViewScrollListener(linearLayoutManager) {
+                override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
+                    loadNextPage(page)
+                }
             }
+            addOnScrollListener(scrollListener)
+
+            adapter = TopMoviesAdapter(movies) {
+                goToMovieDetails(it)
+            }
+
         }
-        rv_movies_list.addOnScrollListener(scrollListener)
-        val adapter = TopMoviesAdapter(movies) {
-            goToMovieDetails(it)
-        }
-        rv_movies_list.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
-        rv_movies_list.adapter = adapter
     }
 
     private fun handleMovieError(error: Throwable) = ErrorDialog(this).showDialog()

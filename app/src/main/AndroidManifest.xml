@@ -4,8 +4,13 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <queries>
+        <package android:name="com.whatsapp" />
+        <package android:name="com.facebook.orca" />
+    </queries>
+
     <application
-        android:name=".TmdbApplication"
+        android:name="org.lucashos.tmdb.TmdbApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_claquete"
         android:label="@string/app_name"

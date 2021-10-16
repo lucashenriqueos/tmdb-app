@@ -2,6 +2,7 @@ package org.lucashos.feature.detail
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_movie_detail.ctv_movie_detail_favourite

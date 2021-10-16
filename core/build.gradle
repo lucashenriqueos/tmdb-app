@@ -32,6 +32,9 @@ android {
 dependencies {
     kapt deps.dagger.dagger_compiler
     kapt deps.dagger.dagger_processor
+    implementation(deps.design.glide) {
+        exclude group: "com.android.support"
+    }
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation deps.core.kotlin
     implementation deps.core.rxjava

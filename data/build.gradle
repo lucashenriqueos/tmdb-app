@@ -34,6 +34,7 @@ dependencies {
     implementation deps.dagger.dagger_android
     implementation deps.retrofit.retrofit
     implementation deps.retrofit.retrofit_gson
+    implementation deps.retrofit.gson
     implementation deps.room.room
     implementation deps.room.room_compiler
     implementation deps.room.room_rxjava

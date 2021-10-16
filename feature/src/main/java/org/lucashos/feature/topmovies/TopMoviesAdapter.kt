@@ -49,3 +49,4 @@ class TopMoviesAdapter(private val moviesList: List<MovieBO>, private val onClic
     }
 }
 
+

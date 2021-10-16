@@ -1,77 +1,77 @@
 ext {
     deps_versions = [
-            androidx_core_version       : '1.3.0',
-            appcompat_version           : '1.1.0',
-            constraintlayout_version    : '1.1.3',
-            junit_version               : '4.12',
-            xjunit_version              : '1.1.1',
-            espresso_version            : '3.2.0',
-            dagger_version              : '2.28.3',
-            room_version                : '2.2.5',
-            arch_version                : '2.1.0',
-            lifecycle_version           : '2.2.0',
-            rxjava_version              : '2.2.19',
-            rxandroid_version           : '2.1.1',
-            retrofit_version            : '2.9.0',
-            gson_version                : '2.8.8',
-            recycler_view_version       : '1.1.0',
-            card_view_version           : '1.0.0',
-            picasso_version             : '2.71828',
-            mockk_version               : '1.10.0',
-            kotest_version              : '4.2.0.RC2',
-            material_version            : '1.2.0',
-            glide_version               : '4.11.0',
-            jacoco_version              : '0.8.1'
+            androidx_core_version   : '1.3.0',
+            appcompat_version       : '1.1.0',
+            constraintlayout_version: '1.1.3',
+            junit_version           : '4.12',
+            xjunit_version          : '1.1.1',
+            espresso_version        : '3.2.0',
+            dagger_version          : '2.28.3',
+            room_version            : '2.2.5',
+            arch_version            : '2.1.0',
+            lifecycle_version       : '2.2.0',
+            rxjava_version          : '2.2.19',
+            rxandroid_version       : '2.1.1',
+            retrofit_version        : '2.9.0',
+            gson_version            : '2.8.8',
+            recycler_view_version   : '1.1.0',
+            card_view_version       : '1.0.0',
+            picasso_version         : '2.71828',
+            mockk_version           : '1.10.0',
+            kotest_version          : '4.2.0.RC2',
+            material_version        : '1.4.0',
+            glide_version           : '4.11.0',
+            jacoco_version          : '0.8.1'
     ]
 
     deps = [
             core    : [
-                    kotlin              : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
-                    rxjava              : "io.reactivex.rxjava2:rxjava:$deps_versions.rxjava_version",
-                    rxandroid           : "io.reactivex.rxjava2:rxandroid:$deps_versions.rxandroid_version"
+                    kotlin   : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
+                    rxjava   : "io.reactivex.rxjava2:rxjava:$deps_versions.rxjava_version",
+                    rxandroid: "io.reactivex.rxjava2:rxandroid:$deps_versions.rxandroid_version"
 
             ],
             androidx: [
-                    androidx_core       : "androidx.core:core-ktx:$deps_versions.androidx_core_version",
-                    app_compat          : "androidx.appcompat:appcompat:$deps_versions.appcompat_version",
-                    viewModel           : "androidx.lifecycle:lifecycle-viewmodel-ktx:$deps_versions.lifecycle_version",
-                    livedata            : "androidx.lifecycle:lifecycle-livedata-ktx:$deps_versions.lifecycle_version",
+                    androidx_core: "androidx.core:core-ktx:$deps_versions.androidx_core_version",
+                    app_compat   : "androidx.appcompat:appcompat:$deps_versions.appcompat_version",
+                    viewModel    : "androidx.lifecycle:lifecycle-viewmodel-ktx:$deps_versions.lifecycle_version",
+                    livedata     : "androidx.lifecycle:lifecycle-livedata-ktx:$deps_versions.lifecycle_version",
             ],
-            design: [
-                    recycler_view       : "androidx.recyclerview:recyclerview:$deps_versions.recycler_view_version",
-                    constraint_layout   : "androidx.constraintlayout:constraintlayout:$deps_versions.constraintlayout_version",
-                    card_view           : "androidx.cardview:cardview:$deps_versions.card_view_version",
-                    material            : "com.google.android.material:material:$deps_versions.material_version",
-                    glide              : "com.github.bumptech.glide:glide:$deps_versions.glide_version"
+            design  : [
+                    recycler_view    : "androidx.recyclerview:recyclerview:$deps_versions.recycler_view_version",
+                    constraint_layout: "androidx.constraintlayout:constraintlayout:$deps_versions.constraintlayout_version",
+                    card_view        : "androidx.cardview:cardview:$deps_versions.card_view_version",
+                    material         : "com.google.android.material:material:$deps_versions.material_version",
+                    glide            : "com.github.bumptech.glide:glide:$deps_versions.glide_version"
             ],
             dagger  : [
-                    dagger              : "com.google.dagger:dagger:$deps_versions.dagger_version",
-                    dagger_android      : "com.google.dagger:dagger-android:$deps_versions.dagger_version",
-                    dagger_compiler     : "com.google.dagger:dagger-compiler:$deps_versions.dagger_version",
-                    dagger_processor    : "com.google.dagger:dagger-android-processor:$deps_versions.dagger_version",
+                    dagger          : "com.google.dagger:dagger:$deps_versions.dagger_version",
+                    dagger_android  : "com.google.dagger:dagger-android:$deps_versions.dagger_version",
+                    dagger_compiler : "com.google.dagger:dagger-compiler:$deps_versions.dagger_version",
+                    dagger_processor: "com.google.dagger:dagger-android-processor:$deps_versions.dagger_version",
             ],
             retrofit: [
-                    retrofit            : "com.squareup.retrofit2:retrofit:$deps_versions.retrofit_version",
-                    retrofit_adapter    : "com.squareup.retrofit2:adapter-rxjava2:$deps_versions.retrofit_version",
-                    retrofit_gson       : "com.squareup.retrofit2:converter-gson:$deps_versions.retrofit_version",
-                    gson                : "com.google.code.gson:gson:$deps_versions.gson_version"
+                    retrofit        : "com.squareup.retrofit2:retrofit:$deps_versions.retrofit_version",
+                    retrofit_adapter: "com.squareup.retrofit2:adapter-rxjava2:$deps_versions.retrofit_version",
+                    retrofit_gson   : "com.squareup.retrofit2:converter-gson:$deps_versions.retrofit_version",
+                    gson            : "com.google.code.gson:gson:$deps_versions.gson_version"
 
             ],
             room    : [
-                    room                : "androidx.room:room-runtime:$deps_versions.room_version",
-                    room_compiler       : "androidx.room:room-compiler:$deps_versions.room_version",
-                    room_rxjava         : "androidx.room:room-rxjava2:$deps_versions.room_version",
+                    room         : "androidx.room:room-runtime:$deps_versions.room_version",
+                    room_compiler: "androidx.room:room-compiler:$deps_versions.room_version",
+                    room_rxjava  : "androidx.room:room-rxjava2:$deps_versions.room_version",
             ],
             test    : [
-                    junit               : "junit:junit:$deps_versions.junit_version",
-                    xJunit              : "androidx.test.ext:junit:$deps_versions.xjunit_version",
-                    espressoCore        : "androidx.test.espresso:espresso-core:$deps_versions.espresso_version",
-                    roomTest            : "androidx.room:room-testing:$deps_versions.room_version",
-                    archTest            : "androidx.arch.core:core-testing:$deps_versions.arch_version",
-                    mockk               : "io.mockk:mockk:$deps_versions.mockk_version",
-                    kotest              : "io.kotest:kotest-assertions-core-jvm:$deps_versions.kotest_version",
-                    kotest_arrow        : "io.kotest:kotest-assertions-arrow-jvm:$deps_versions.kotest_version",
-                    jacoco              : "org.jacoco:org.jacoco.core:$deps_versions.jacoco_version"
+                    junit       : "junit:junit:$deps_versions.junit_version",
+                    xJunit      : "androidx.test.ext:junit:$deps_versions.xjunit_version",
+                    espressoCore: "androidx.test.espresso:espresso-core:$deps_versions.espresso_version",
+                    roomTest    : "androidx.room:room-testing:$deps_versions.room_version",
+                    archTest    : "androidx.arch.core:core-testing:$deps_versions.arch_version",
+                    mockk       : "io.mockk:mockk:$deps_versions.mockk_version",
+                    kotest      : "io.kotest:kotest-assertions-core-jvm:$deps_versions.kotest_version",
+                    kotest_arrow: "io.kotest:kotest-assertions-arrow-jvm:$deps_versions.kotest_version",
+                    jacoco      : "org.jacoco:org.jacoco.core:$deps_versions.jacoco_version"
             ]
     ]
 
