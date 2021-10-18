@@ -8,11 +8,13 @@
     <color name="colorSecondaryDark">#af26bd</color>
     <color name="colorSecondaryAccent">#ff93ff</color>
 
-    <color name="primaryText">#fafafa</color>
+    <color name="primaryText">#f2f2f2</color>
     <color name="secondaryText">#212121</color>
 
     <color name="error">#B00020</color>
     <color name="default_background">#020238</color>
+    <color name="background_20">#33020238</color>
+    <color name="background_40">#66020238</color>
     <color name="default_surface">#D6D6D6</color>
     <color name="surface_20">#33D6D6D6</color>
 </resources>

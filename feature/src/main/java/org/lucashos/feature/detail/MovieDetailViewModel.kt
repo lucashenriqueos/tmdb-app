@@ -3,7 +3,7 @@ package org.lucashos.feature.detail
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import org.lucashos.core.base.BaseViewModel
-import org.lucashos.domain.entity.MovieBO
+import org.lucashos.core.base.ViewStates
 import org.lucashos.domain.entity.MovieDetailBO
 import org.lucashos.domain.entity.MoviesListBO
 import org.lucashos.domain.usecase.GetMovieDetailUseCase
@@ -76,13 +76,11 @@ class MovieDetailViewModel(
     }
 }
 
-interface ViewStates
-
-object SimilarMoviesState: ViewStates {
+sealed class SimilarMoviesState : ViewStates {
 }
 
-sealed class MovieDetailState: ViewStates {
-    data class DetailsLoaded(val movie: MovieDetailBO): MovieDetailState()
-    data class Error(val error: Throwable?): ViewStates
-    object EmptyList: MovieDetailState()
+sealed class MovieDetailState : ViewStates {
+    data class DetailsLoaded(val movie: MovieDetailBO) : MovieDetailState()
+    data class Error(val error: Throwable?) : ViewStates
+    object EmptyList : MovieDetailState()
 }

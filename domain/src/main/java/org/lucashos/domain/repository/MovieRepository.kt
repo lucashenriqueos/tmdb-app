@@ -1,6 +1,8 @@
 package org.lucashos.domain.repository
 
 import io.reactivex.Single
+import org.lucashos.domain.entity.GenreBO
+import org.lucashos.domain.entity.MovieBO
 import org.lucashos.domain.entity.MovieDetailBO
 import org.lucashos.domain.entity.MoviesListBO
 
@@ -18,4 +20,8 @@ interface MovieRepository {
     fun addFavourite(id: Long): Single<Any>
 
     fun removeFavourite(id: Long): Single<Int>
+
+    fun getRandomPopularMovie(): Single<MovieBO>
+
+    fun getGenres(): Single<List<GenreBO>>
 }

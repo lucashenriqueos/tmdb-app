@@ -11,40 +11,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/title_toolbar"
-                android:layout_width="match_parent"
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/layout_toolbar"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/spacing_medium"
-                android:background="@color/colorPrimary"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageView
-                    android:id="@+id/iv_movie_detail_share"
-                    android:layout_width="@dimen/icon_large"
-                    android:layout_height="@dimen/icon_large"
-                    android:layout_gravity="start"
-                    android:src="@drawable/ic_baseline_share_24"
-                    android:tint="@color/primaryText" />
-
-                <TextView
-                    android:id="@+id/tv_title"
-                    style="@style/Toolbar.Title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:textStyle="bold"
-                    tools:text="Mocky II" />
-
-                <CheckedTextView
-                    android:id="@+id/ctv_movie_detail_favourite"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:checked="false"
-                    android:drawableEnd="@android:drawable/btn_star" />
-
-            </androidx.appcompat.widget.Toolbar>
+                android:layout_width="match_parent" />
 
             <ImageView
                 android:id="@+id/iv_movie_detail_folder"
@@ -52,7 +23,7 @@
                 android:layout_height="@dimen/folder_height"
                 android:layout_marginTop="@dimen/spacing_large"
                 android:layout_marginBottom="@dimen/spacing_medium"
-                app:layout_constraintTop_toBottomOf="@id/title_toolbar"
+                app:layout_constraintTop_toBottomOf="@id/toolbar"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:srcCompat="@drawable/ic_baseline_movie_24"
@@ -85,7 +56,7 @@
                 android:layout_height="@dimen/icon_medium"
                 android:layout_marginEnd="@dimen/spacing_medium"
                 android:src="@drawable/ic_baseline_star_24"
-                android:tint="@color/colorPrimaryDark"
+                app:tint="@color/colorPrimaryDark"
                 app:layout_constraintBottom_toBottomOf="@id/tv_movie_detail_rating"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"

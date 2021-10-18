@@ -2,26 +2,29 @@ package org.lucashos.feature.detail
 
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.activity_movie_detail.ctv_movie_detail_favourite
 import kotlinx.android.synthetic.main.activity_movie_detail.iv_movie_detail_folder
 import kotlinx.android.synthetic.main.activity_movie_detail.rv_movie_detail_related
 import kotlinx.android.synthetic.main.activity_movie_detail.tv_movie_detail_overview
 import kotlinx.android.synthetic.main.activity_movie_detail.tv_movie_detail_rating
 import kotlinx.android.synthetic.main.activity_movie_detail.tv_movie_detail_release_date
 import kotlinx.android.synthetic.main.activity_movie_detail.tv_similar_titles
-import kotlinx.android.synthetic.main.activity_movie_detail.tv_title
+import kotlinx.android.synthetic.main.layout_toolbar.ctv_toolbar_favourite
+import kotlinx.android.synthetic.main.layout_toolbar.iv_toolbar_share
+import kotlinx.android.synthetic.main.layout_toolbar.tv_toolbar_title
 import org.lucashos.core.base.BaseActivity
 import org.lucashos.core.dialog.ErrorDialog
 import org.lucashos.core.extension.gone
 import org.lucashos.core.extension.loadImage
 import org.lucashos.core.extension.toDateFormat
+import org.lucashos.core.extension.visible
 import org.lucashos.domain.entity.MovieBO
 import org.lucashos.domain.entity.MovieDetailBO
 import org.lucashos.domain.entity.MoviesListBO
 import org.lucashos.feature.R
+import java.util.logging.Logger
 import javax.inject.Inject
 
 class MovieDetailActivity : BaseActivity(R.layout.activity_movie_detail) {
@@ -47,7 +50,9 @@ class MovieDetailActivity : BaseActivity(R.layout.activity_movie_detail) {
     }
 
     private fun initViews() {
-        ctv_movie_detail_favourite.setOnClickListener {
+        ctv_toolbar_favourite.visible()
+        iv_toolbar_share.visible()
+        ctv_toolbar_favourite.setOnClickListener {
             viewModel.updateFavourite(movie)
         }
     }
@@ -90,12 +95,13 @@ class MovieDetailActivity : BaseActivity(R.layout.activity_movie_detail) {
     }
 
     private fun handleError(error: Throwable?) {
+        Log.e("error", "An error occurred", error)
         ErrorDialog(this).showDialog()
     }
 
     private fun handleSuccess(movie: MovieDetailBO) {
         this.movie = movie
-        tv_title.text = movie.title
+        tv_toolbar_title.text = movie.title
         tv_movie_detail_release_date.text =
             movie.releaseDate?.toDateFormat() ?: getString(R.string.unkown_release_date)
         tv_movie_detail_rating.text = movie.rating.toString()
@@ -107,7 +113,7 @@ class MovieDetailActivity : BaseActivity(R.layout.activity_movie_detail) {
     }
 
     private fun toggleFavourite(isFav: Boolean) {
-        ctv_movie_detail_favourite.isChecked = isFav
+        ctv_toolbar_favourite.isChecked = isFav
     }
 
     private fun goToMovieDetails(movie: MovieBO) = startActivity(getStartIntent(this, movie.id))

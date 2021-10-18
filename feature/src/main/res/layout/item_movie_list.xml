@@ -25,7 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scaleType="fitCenter"
-                app:shapeAppearanceOverlay="@style/ImageView.Corner"
+                app:shapeAppearanceOverlay="@style/ImageView.Corner_8_0_8_0"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:src="@drawable/ic_baseline_movie_24" />
 

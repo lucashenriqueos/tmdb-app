@@ -1,17 +1,36 @@
 <resources>
+
     <style name="Toolbar.Title" parent="TextAppearance.MaterialComponents.Headline6" />
+
     <style name="HeadLine" parent="TextAppearance.MaterialComponents.Headline5" />
+
     <style name="Subtitle" parent="TextAppearance.MaterialComponents.Subtitle1" />
+
     <style name="Body" parent="TextAppearance.MaterialComponents.Body1" />
+
     <style name="Caption" parent="TextAppearance.MaterialComponents.Caption" />
+
     <style name="Button" parent="TextAppearance.MaterialComponents.Button" />
+
     <style name="Overline" parent="TextAppearance.MaterialComponents.Overline" />
 
-    <style name="ImageView.Corner" parent="">
-        <item name="cornerSizeTopRight">0dp</item>
+    <style name="ImageView.Corner_8_0_8_0" parent="">
         <item name="cornerSizeTopLeft">8dp</item>
-        <item name="cornerSizeBottomLeft">0dp</item>
+        <item name="cornerSizeTopRight">0dp</item>
         <item name="cornerSizeBottomRight">8dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
         <item name="cornerFamily">rounded</item>
+    </style>
+
+    <style name="ImageView.Corner_8_0_0_8" parent="">
+        <item name="cornerSizeTopLeft">8dp</item>
+        <item name="cornerSizeTopRight">0dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSizeBottomLeft">8dp</item>
+        <item name="cornerFamily">rounded</item>
+    </style>
+
+    <style name="ImageView.Corner_8" parent="">
+        <item name="cornerSize">8dp</item>
     </style>
 </resources>

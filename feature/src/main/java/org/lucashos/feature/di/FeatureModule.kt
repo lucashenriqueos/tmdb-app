@@ -51,10 +51,15 @@ abstract class FeatureModule {
             SearchMoviesUseCase(movieRepository)
 
         @Provides
+        fun providePopularMovieUseCase(movieRepository: MovieRepository) =
+            GetPopularMovieUseCase(movieRepository)
+
+        @Provides
         fun providesTopMoviesViewModel(
             topMoviesUseCase: ListTopMoviesUseCase,
-            searchMoviesUseCase: SearchMoviesUseCase
-        ) = TopMoviesViewModel(topMoviesUseCase, searchMoviesUseCase)
+            searchMoviesUseCase: SearchMoviesUseCase,
+            popularMovieUseCase: GetPopularMovieUseCase
+        ) = TopMoviesViewModel(topMoviesUseCase, searchMoviesUseCase, popularMovieUseCase)
 
         @Provides
         fun providesMovieDetailViewModel(

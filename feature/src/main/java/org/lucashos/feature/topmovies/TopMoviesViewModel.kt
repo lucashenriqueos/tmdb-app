@@ -1,22 +1,36 @@
 package org.lucashos.feature.topmovies
 
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.OnLifecycleEvent
 import org.lucashos.core.base.BaseViewModel
+import org.lucashos.core.base.ViewStates
+import org.lucashos.domain.entity.MovieBO
 import org.lucashos.domain.entity.MoviesListBO
+import org.lucashos.domain.usecase.GetPopularMovieUseCase
 import org.lucashos.domain.usecase.ListTopMoviesUseCase
 import org.lucashos.domain.usecase.SearchMoviesUseCase
 import org.lucashos.domain.utils.Either
+import org.lucashos.feature.topmovies.PopularMovieState.Error
+import org.lucashos.feature.topmovies.PopularMovieState.HighlightMovie
 
 class TopMoviesViewModel(
     private val topMoviesUseCase: ListTopMoviesUseCase,
-    private val searchMoviesUseCase: SearchMoviesUseCase
+    private val searchMoviesUseCase: SearchMoviesUseCase,
+    private val popularMovieUseCase: GetPopularMovieUseCase
 ) : BaseViewModel() {
     private val _movieListLiveData: MutableLiveData<Either<Throwable, MoviesListBO>> =
         MutableLiveData()
 
     val moviesListLiveData: LiveData<Either<Throwable, MoviesListBO>>
         get() = _movieListLiveData
+
+    private val _popularMovieLiveData: MutableLiveData<PopularMovieState> =
+        MutableLiveData()
+
+    val popularMovieLiveData: LiveData<PopularMovieState>
+        get() = _popularMovieLiveData
 
     fun getTopMovies(page: Int = 1) {
         disposables.add(topMoviesUseCase.execute(page).subscribe({
@@ -26,12 +40,14 @@ class TopMoviesViewModel(
         }))
     }
 
-    fun searchMovie(title: String, page: Int) {
-        disposables.add(searchMoviesUseCase.execute(SearchMoviesUseCase.Params(title, page)).subscribe({
-            _movieListLiveData.value = Either.Right(it)
-        }, {
-            it.printStackTrace()
-            _movieListLiveData.value = Either.Left(it)
-        }))
-    }
+    fun getPopularMovie() = popularMovieUseCase.execute(Unit).subscribe({
+        _popularMovieLiveData.postValue(HighlightMovie(it))
+    }, {
+        _popularMovieLiveData.postValue(Error(it))
+    })
+}
+
+sealed class PopularMovieState: ViewStates {
+    data class HighlightMovie(val movie: MovieBO): PopularMovieState()
+    data class Error(val error: Throwable): PopularMovieState()
 }
