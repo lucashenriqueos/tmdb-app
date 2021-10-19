@@ -13,6 +13,7 @@ ext {
             rxjava_version          : '2.2.19',
             rxandroid_version       : '2.1.1',
             retrofit_version        : '2.9.0',
+            okhttp_logger_version   : '4.9.2',
             gson_version            : '2.8.8',
             recycler_view_version   : '1.1.0',
             card_view_version       : '1.0.0',
@@ -21,9 +22,9 @@ ext {
             kotest_version          : '4.2.0.RC2',
             material_version        : '1.4.0',
             glide_version           : '4.11.0',
-            jacoco_version          : '0.8.1'
+            jacoco_version          : '0.8.1',
+            timber_version          : '4.7.1'
     ]
-
     deps = [
             core    : [
                     kotlin   : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
@@ -44,16 +45,17 @@ ext {
                     material         : "com.google.android.material:material:$deps_versions.material_version",
                     glide            : "com.github.bumptech.glide:glide:$deps_versions.glide_version"
             ],
-            dagger  : [
+            di      : [
                     dagger          : "com.google.dagger:dagger:$deps_versions.dagger_version",
                     dagger_android  : "com.google.dagger:dagger-android:$deps_versions.dagger_version",
                     dagger_compiler : "com.google.dagger:dagger-compiler:$deps_versions.dagger_version",
                     dagger_processor: "com.google.dagger:dagger-android-processor:$deps_versions.dagger_version",
             ],
-            retrofit: [
+            network : [
                     retrofit        : "com.squareup.retrofit2:retrofit:$deps_versions.retrofit_version",
                     retrofit_adapter: "com.squareup.retrofit2:adapter-rxjava2:$deps_versions.retrofit_version",
                     retrofit_gson   : "com.squareup.retrofit2:converter-gson:$deps_versions.retrofit_version",
+                    okhttp_logger   : "com.squareup.okhttp3:logging-interceptor:$deps_versions.okhttp_logger_version",
                     gson            : "com.google.code.gson:gson:$deps_versions.gson_version"
 
             ],
@@ -61,6 +63,9 @@ ext {
                     room         : "androidx.room:room-runtime:$deps_versions.room_version",
                     room_compiler: "androidx.room:room-compiler:$deps_versions.room_version",
                     room_rxjava  : "androidx.room:room-rxjava2:$deps_versions.room_version",
+            ],
+            logging : [
+                    timber: "com.jakewharton.timber:timber:$deps_versions.timber_version"
             ],
             test    : [
                     junit       : "junit:junit:$deps_versions.junit_version",
@@ -74,5 +79,6 @@ ext {
                     jacoco      : "org.jacoco:org.jacoco.core:$deps_versions.jacoco_version"
             ]
     ]
+
 
 }

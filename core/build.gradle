@@ -4,34 +4,18 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.0"
-
-    defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles "consumer-rules.pro"
-    }
-
+    with common_config
     buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        debug {
+            buildConfigField "String", "API_KEY", "\"Bearer eyJhbGciOiJIUzI1NiJ9" +
+                    ".eyJhdWQiOiJiYzEwNDY4NzY5MjE5ZDg5MzQzNjM0YzE0MzI4MGUxNyIsInN1YiI6IjViYzYyMmI0YzNhMzY4MmQ2MDA4NTVkNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.tWAJy69RqCBn4u8TzoDX989EcktbiXD5On7wnSjKak0\""
         }
-    }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
 dependencies {
-    kapt deps.dagger.dagger_compiler
-    kapt deps.dagger.dagger_processor
+    kapt deps.di.dagger_compiler
+    kapt deps.di.dagger_processor
     implementation(deps.design.glide) {
         exclude group: "com.android.support"
     }
@@ -41,13 +25,15 @@ dependencies {
     implementation deps.core.rxandroid
     implementation deps.androidx.app_compat
     implementation deps.androidx.androidx_core
-    implementation deps.dagger.dagger
-    implementation deps.dagger.dagger_android
+    implementation deps.di.dagger
+    implementation deps.di.dagger_android
     implementation deps.design.glide
-    implementation deps.retrofit.retrofit
-    implementation deps.retrofit.retrofit_adapter
-    implementation deps.retrofit.retrofit_gson
-    implementation deps.retrofit.gson
+    implementation deps.network.retrofit
+    implementation deps.network.retrofit_adapter
+    implementation deps.network.retrofit_gson
+    implementation deps.network.okhttp_logger
+    implementation deps.network.gson
+    implementation deps.logging.timber
     testImplementation deps.test.junit
     androidTestImplementation deps.test.xJunit
 }

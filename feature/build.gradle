@@ -4,38 +4,20 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.0"
-
-    defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles "consumer-rules.pro"
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
+    with common_config
 }
 
 dependencies {
-    kapt deps.dagger.dagger_compiler
-    kapt deps.dagger.dagger_processor
+    kapt deps.di.dagger_compiler
+    kapt deps.di.dagger_processor
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation deps.core.kotlin
     implementation deps.core.rxjava
     implementation deps.core.rxandroid
     implementation deps.androidx.androidx_core
     implementation deps.androidx.app_compat
-    implementation deps.dagger.dagger
-    implementation deps.dagger.dagger_android
+    implementation deps.di.dagger
+    implementation deps.di.dagger_android
     implementation deps.design.constraint_layout
     implementation deps.design.recycler_view
     implementation deps.design.card_view

@@ -4,25 +4,7 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.0"
-
-    defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles "consumer-rules.pro"
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
+    with common_config
 }
 
 dependencies {
@@ -30,20 +12,19 @@ dependencies {
     implementation deps.core.kotlin
     implementation deps.core.rxjava
     implementation deps.androidx.androidx_core
-    implementation deps.dagger.dagger
-    implementation deps.dagger.dagger_android
-    implementation deps.retrofit.retrofit
-    implementation deps.retrofit.retrofit_gson
-    implementation deps.retrofit.gson
+    implementation deps.di.dagger
+    implementation deps.di.dagger_android
+    implementation deps.network.retrofit
+    implementation deps.network.retrofit_gson
+    implementation deps.network.gson
     implementation deps.room.room
     implementation deps.room.room_compiler
     implementation deps.room.room_rxjava
-    kapt deps.dagger.dagger_compiler
-    kapt deps.dagger.dagger_processor
+    kapt deps.di.dagger_compiler
+    kapt deps.di.dagger_processor
     testImplementation deps.test.junit
     androidTestImplementation deps.test.xJunit
 
     implementation project(':domain')
     implementation project(':core')
-
 }
