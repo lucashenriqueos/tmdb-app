@@ -10,8 +10,9 @@ import org.lucashos.domain.usecase.GetMovieDetailUseCase
 import org.lucashos.domain.usecase.GetSimilarMoviesUseCase
 import org.lucashos.domain.usecase.UpdateFavoriteMovieUseCase
 import org.lucashos.domain.utils.Either
+import javax.inject.Inject
 
-class MovieDetailViewModel(
+class MovieDetailViewModel @Inject constructor(
     private val getMovieDetailUseCase: GetMovieDetailUseCase,
     private val updateFavouriteUseCase: UpdateFavoriteMovieUseCase,
     private val similarMoviesUseCase: GetSimilarMoviesUseCase

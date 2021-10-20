@@ -1,21 +1,19 @@
 package org.lucashos.feature.topmovies
 
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.OnLifecycleEvent
 import org.lucashos.core.base.BaseViewModel
 import org.lucashos.core.base.ViewStates
 import org.lucashos.domain.entity.MovieBO
 import org.lucashos.domain.entity.MoviesListBO
 import org.lucashos.domain.usecase.GetPopularMovieUseCase
 import org.lucashos.domain.usecase.ListTopMoviesUseCase
-import org.lucashos.domain.usecase.SearchMoviesUseCase
 import org.lucashos.domain.utils.Either
 import org.lucashos.feature.topmovies.PopularMovieState.Error
 import org.lucashos.feature.topmovies.PopularMovieState.HighlightMovie
+import javax.inject.Inject
 
-class TopMoviesViewModel(
+class TopMoviesViewModel @Inject constructor(
     private val topMoviesUseCase: ListTopMoviesUseCase,
     private val popularMovieUseCase: GetPopularMovieUseCase
 ) : BaseViewModel() {
@@ -46,7 +44,7 @@ class TopMoviesViewModel(
     })
 }
 
-sealed class PopularMovieState: ViewStates {
-    data class HighlightMovie(val movie: MovieBO): PopularMovieState()
-    data class Error(val error: Throwable): PopularMovieState()
+sealed class PopularMovieState : ViewStates {
+    data class HighlightMovie(val movie: MovieBO) : PopularMovieState()
+    data class Error(val error: Throwable) : PopularMovieState()
 }

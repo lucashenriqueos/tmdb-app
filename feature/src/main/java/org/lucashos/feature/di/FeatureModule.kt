@@ -4,24 +4,31 @@ import dagger.Module
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector
 import org.lucashos.core.di.CoreModule
+import org.lucashos.core.di.scope.ActivityScope
 import org.lucashos.domain.repository.MovieRepository
-import org.lucashos.domain.usecase.*
+import org.lucashos.domain.usecase.CheckFavoriteMovieUseCase
+import org.lucashos.domain.usecase.GetMovieDetailUseCase
+import org.lucashos.domain.usecase.GetPopularMovieUseCase
+import org.lucashos.domain.usecase.GetSimilarMoviesUseCase
+import org.lucashos.domain.usecase.ListTopMoviesUseCase
+import org.lucashos.domain.usecase.SearchMoviesUseCase
+import org.lucashos.domain.usecase.UpdateFavoriteMovieUseCase
 import org.lucashos.feature.detail.MovieDetailActivity
-import org.lucashos.feature.detail.MovieDetailViewModel
 import org.lucashos.feature.topmovies.TopMoviesActivity
-import org.lucashos.feature.topmovies.TopMoviesViewModel
 
 @Module
 abstract class FeatureModule {
 
-    @ContributesAndroidInjector(modules = [ProvidingModule::class, CoreModule::class])
+    @ActivityScope
+    @ContributesAndroidInjector(modules = [UseCaseModule::class])
     abstract fun provideTopMoviesActivity(): TopMoviesActivity
 
-    @ContributesAndroidInjector(modules = [ProvidingModule::class, CoreModule::class])
+    @ActivityScope
+    @ContributesAndroidInjector(modules = [UseCaseModule::class])
     abstract fun provideMovieDetailActivity(): MovieDetailActivity
 
-    @Module
-    class ProvidingModule {
+    @Module(includes = [CoreModule::class])
+    class UseCaseModule {
 
         @Provides
         fun provideListTopMoviesUseCase(movieRepository: MovieRepository) =
@@ -53,23 +60,6 @@ abstract class FeatureModule {
         @Provides
         fun providePopularMovieUseCase(movieRepository: MovieRepository) =
             GetPopularMovieUseCase(movieRepository)
-
-        @Provides
-        fun providesTopMoviesViewModel(
-            topMoviesUseCase: ListTopMoviesUseCase,
-            popularMovieUseCase: GetPopularMovieUseCase
-        ) = TopMoviesViewModel(topMoviesUseCase, popularMovieUseCase)
-
-        @Provides
-        fun providesMovieDetailViewModel(
-            getMovieDetailUseCase: GetMovieDetailUseCase,
-            updateFavouriteUseCase: UpdateFavoriteMovieUseCase,
-            similarMoviesUseCase: GetSimilarMoviesUseCase
-        ) = MovieDetailViewModel(
-            getMovieDetailUseCase,
-            updateFavouriteUseCase,
-            similarMoviesUseCase
-        )
     }
 
 }
