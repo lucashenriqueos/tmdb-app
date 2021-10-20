@@ -17,7 +17,6 @@ import org.lucashos.feature.topmovies.PopularMovieState.HighlightMovie
 
 class TopMoviesViewModel(
     private val topMoviesUseCase: ListTopMoviesUseCase,
-    private val searchMoviesUseCase: SearchMoviesUseCase,
     private val popularMovieUseCase: GetPopularMovieUseCase
 ) : BaseViewModel() {
     private val _movieListLiveData: MutableLiveData<Either<Throwable, MoviesListBO>> =

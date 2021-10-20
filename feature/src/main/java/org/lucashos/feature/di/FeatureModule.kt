@@ -57,9 +57,8 @@ abstract class FeatureModule {
         @Provides
         fun providesTopMoviesViewModel(
             topMoviesUseCase: ListTopMoviesUseCase,
-            searchMoviesUseCase: SearchMoviesUseCase,
             popularMovieUseCase: GetPopularMovieUseCase
-        ) = TopMoviesViewModel(topMoviesUseCase, searchMoviesUseCase, popularMovieUseCase)
+        ) = TopMoviesViewModel(topMoviesUseCase, popularMovieUseCase)
 
         @Provides
         fun providesMovieDetailViewModel(
