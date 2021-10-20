@@ -1,25 +1,26 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-parcelize'
 
 android {
     with common_config
 }
 
 dependencies {
-    kapt deps.di.dagger_compiler
-    kapt deps.di.dagger_processor
     implementation fileTree(dir: "libs", include: ["*.jar"])
+
     implementation deps.core.kotlin
     implementation deps.core.rxjava
     implementation deps.androidx.androidx_core
     implementation deps.androidx.app_compat
     implementation deps.room.room
-    implementation deps.room.room_compiler
+    kapt deps.room.room_compiler
     implementation deps.room.room_rxjava
     implementation deps.di.dagger
     implementation deps.di.dagger_android
+    kapt deps.di.dagger_compiler
+    kapt deps.di.dagger_processor
     implementation deps.design.material
     testImplementation deps.test.junit
     androidTestImplementation deps.test.xJunit

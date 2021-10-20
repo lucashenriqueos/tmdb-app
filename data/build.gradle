@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-parcelize'
 
 android {
     with common_config
@@ -9,19 +9,20 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
+
     implementation deps.core.kotlin
     implementation deps.core.rxjava
     implementation deps.androidx.androidx_core
+    kapt deps.di.dagger_compiler
+    kapt deps.di.dagger_processor
     implementation deps.di.dagger
     implementation deps.di.dagger_android
     implementation deps.network.retrofit
     implementation deps.network.retrofit_gson
     implementation deps.network.gson
     implementation deps.room.room
-    implementation deps.room.room_compiler
+    kapt deps.room.room_compiler
     implementation deps.room.room_rxjava
-    kapt deps.di.dagger_compiler
-    kapt deps.di.dagger_processor
     testImplementation deps.test.junit
     androidTestImplementation deps.test.xJunit
 
