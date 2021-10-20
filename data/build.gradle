@@ -10,21 +10,12 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
-    implementation deps.core.kotlin
-    implementation deps.core.rxjava
-    implementation deps.androidx.androidx_core
-    kapt deps.di.dagger_compiler
-    kapt deps.di.dagger_processor
-    implementation deps.di.dagger
-    implementation deps.di.dagger_android
-    implementation deps.network.retrofit
-    implementation deps.network.retrofit_gson
-    implementation deps.network.gson
-    implementation deps.room.room
-    kapt deps.room.room_compiler
-    implementation deps.room.room_rxjava
-    testImplementation deps.test.junit
-    androidTestImplementation deps.test.xJunit
+    with deps.core
+    with deps.androidx
+    with deps.di
+    with deps.network
+    with deps.room
+    with deps.test
 
     implementation project(':domain')
     implementation project(':core')

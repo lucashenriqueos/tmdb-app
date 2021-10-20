@@ -67,28 +67,4 @@ class TopMoviesViewModelTest {
         assertTrue(result.isLeft)
         result.shouldBe(Either.Left(mock))
     }
-
-    @Test
-    fun `Should return movies list on search`() {
-        val mock = createMoviesListMock()
-        every {
-            searchMoviesUseCase.execute(any())
-        } returns Single.just(mock)
-        viewModel.searchMovie("movie", 1)
-        val result = viewModel.moviesListLiveData.value as Either
-        assertTrue(result.isRight)
-        result.shouldBe(Either.Right(mock))
-    }
-
-    @Test
-    fun `Should return Exception on Either on Movies Search`() {
-        val mock = getDummyException()
-        every {
-            searchMoviesUseCase.execute(any())
-        } returns Single.error(mock)
-        viewModel.searchMovie("", 1)
-        val result = viewModel.moviesListLiveData.value as Either
-        assertTrue(result.isLeft)
-        result.shouldBe(Either.Left(mock))
-    }
 }

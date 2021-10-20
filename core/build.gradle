@@ -14,26 +14,14 @@ android {
 }
 
 dependencies {
-    kapt deps.di.dagger_compiler
-    kapt deps.di.dagger_processor
-    implementation(deps.design.glide) {
-        exclude group: "com.android.support"
-    }
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation deps.core.kotlin
-    implementation deps.core.rxjava
-    implementation deps.core.rxandroid
-    implementation deps.androidx.app_compat
-    implementation deps.androidx.androidx_core
-    implementation deps.di.dagger
-    implementation deps.di.dagger_android
-    implementation deps.design.glide
-    implementation deps.network.retrofit
-    implementation deps.network.retrofit_adapter
-    implementation deps.network.retrofit_gson
-    implementation deps.network.okhttp_logger
-    implementation deps.network.gson
-    implementation deps.logging.timber
-    testImplementation deps.test.junit
-    androidTestImplementation deps.test.xJunit
+
+    with deps.di
+    with deps.core
+    with deps.androidx
+    with deps.design
+    with deps.network
+    with deps.test
+    with deps.logging
+    with deps.test
 }

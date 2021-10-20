@@ -8,12 +8,10 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation deps.core.kotlin
-    implementation deps.core.rxjava
-    implementation deps.core.rxandroid
-    implementation deps.androidx.androidx_core
-    testImplementation deps.test.junit
-    androidTestImplementation deps.test.xJunit
+
+    with deps.core
+    with deps.androidx
+    with deps.test
 
     implementation project(":core")
 }
