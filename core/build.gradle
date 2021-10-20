@@ -1,53 +1,27 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-parcelize'
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.0"
-
-    defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles "consumer-rules.pro"
-    }
-
+    with common_config
     buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        debug {
+            buildConfigField "String", "API_KEY", "\"Bearer eyJhbGciOiJIUzI1NiJ9" +
+                    ".eyJhdWQiOiJiYzEwNDY4NzY5MjE5ZDg5MzQzNjM0YzE0MzI4MGUxNyIsInN1YiI6IjViYzYyMmI0YzNhMzY4MmQ2MDA4NTVkNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.tWAJy69RqCBn4u8TzoDX989EcktbiXD5On7wnSjKak0\""
         }
-    }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
 dependencies {
-    kapt deps.dagger.dagger_compiler
-    kapt deps.dagger.dagger_processor
-    implementation(deps.design.glide) {
-        exclude group: "com.android.support"
-    }
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation deps.core.kotlin
-    implementation deps.core.rxjava
-    implementation deps.core.rxandroid
-    implementation deps.androidx.app_compat
-    implementation deps.androidx.androidx_core
-    implementation deps.dagger.dagger
-    implementation deps.dagger.dagger_android
-    implementation deps.design.glide
-    implementation deps.retrofit.retrofit
-    implementation deps.retrofit.retrofit_adapter
-    implementation deps.retrofit.retrofit_gson
-    implementation deps.retrofit.gson
-    testImplementation deps.test.junit
-    androidTestImplementation deps.test.xJunit
+
+    with deps.di
+    with deps.core
+    with deps.androidx
+    with deps.design
+    with deps.network
+    with deps.test
+    with deps.logging
+    with deps.test
 }

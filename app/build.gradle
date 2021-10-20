@@ -1,52 +1,21 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-parcelize'
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.0"
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-
-    defaultConfig {
-        applicationId "org.lucashos.tmdb"
-        minSdkVersion 21
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
+    with common_config
 }
 
 dependencies {
-    kapt deps.dagger.dagger_compiler
-    kapt deps.dagger.dagger_processor
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation deps.core.kotlin
-    implementation deps.core.rxjava
-    implementation deps.androidx.androidx_core
-    implementation deps.androidx.app_compat
-    implementation deps.room.room
-    implementation deps.room.room_compiler
-    implementation deps.room.room_rxjava
-    implementation deps.dagger.dagger
-    implementation deps.dagger.dagger_android
-    implementation deps.design.material
-    testImplementation deps.test.junit
-    androidTestImplementation deps.test.xJunit
-    androidTestImplementation deps.test.espressoCore
+
+    with deps.core
+    with deps.androidx
+    with deps.di
+    with deps.room
+    with deps.design
+    with deps.test
 
     // Modules dependencies
     implementation project(':data')

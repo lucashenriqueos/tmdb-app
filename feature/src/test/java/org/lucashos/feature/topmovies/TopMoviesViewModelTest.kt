@@ -13,6 +13,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
+import org.lucashos.domain.usecase.GetPopularMovieUseCase
 import org.lucashos.domain.usecase.ListTopMoviesUseCase
 import org.lucashos.domain.usecase.SearchMoviesUseCase
 import org.lucashos.domain.utils.Either
@@ -34,7 +35,7 @@ class TopMoviesViewModelTest {
     lateinit var topMoviesUseCase: ListTopMoviesUseCase
 
     @MockK
-    lateinit var searchMoviesUseCase: SearchMoviesUseCase
+    lateinit var popMovieUseCase: GetPopularMovieUseCase
 
     @InjectMockKs
     lateinit var viewModel: TopMoviesViewModel
@@ -50,7 +51,9 @@ class TopMoviesViewModelTest {
         every {
             topMoviesUseCase.execute(any())
         } returns Single.just(mock)
+
         viewModel.getTopMovies(1)
+
         val result = viewModel.moviesListLiveData.value as Either
         assertTrue(result.isRight)
         result.shouldBe(Either.Right(mock))
@@ -62,31 +65,9 @@ class TopMoviesViewModelTest {
         every {
             topMoviesUseCase.execute(any())
         } returns Single.error(mock)
+
         viewModel.getTopMovies(1)
-        val result = viewModel.moviesListLiveData.value as Either
-        assertTrue(result.isLeft)
-        result.shouldBe(Either.Left(mock))
-    }
 
-    @Test
-    fun `Should return movies list on search`() {
-        val mock = createMoviesListMock()
-        every {
-            searchMoviesUseCase.execute(any())
-        } returns Single.just(mock)
-        viewModel.searchMovie("movie", 1)
-        val result = viewModel.moviesListLiveData.value as Either
-        assertTrue(result.isRight)
-        result.shouldBe(Either.Right(mock))
-    }
-
-    @Test
-    fun `Should return Exception on Either on Movies Search`() {
-        val mock = getDummyException()
-        every {
-            searchMoviesUseCase.execute(any())
-        } returns Single.error(mock)
-        viewModel.searchMovie("", 1)
         val result = viewModel.moviesListLiveData.value as Either
         assertTrue(result.isLeft)
         result.shouldBe(Either.Left(mock))

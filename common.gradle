@@ -1,0 +1,35 @@
+ext {
+
+    common_config = {
+        compileSdkVersion 30
+        buildToolsVersion "30.0.0"
+
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_11
+            targetCompatibility JavaVersion.VERSION_11
+        }
+
+        kotlinOptions {
+            jvmTarget = JavaVersion.VERSION_11.toString()
+        }
+
+        defaultConfig {
+            minSdkVersion 26
+            targetSdkVersion 31
+            versionCode 1
+            versionName "1.0"
+
+            testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+            consumerProguardFiles "consumer-rules.pro"
+        }
+
+        buildTypes {
+            release {
+                buildConfigField "String", "API_KEY", "\"Bearer eyJhbGciOiJIUzI1NiJ9" +
+                        ".eyJhdWQiOiJiYzEwNDY4NzY5MjE5ZDg5MzQzNjM0YzE0MzI4MGUxNyIsInN1YiI6IjViYzYyMmI0YzNhMzY4MmQ2MDA4NTVkNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.tWAJy69RqCBn4u8TzoDX989EcktbiXD5On7wnSjKak0\""
+                minifyEnabled false
+                proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            }
+        }
+    }
+}

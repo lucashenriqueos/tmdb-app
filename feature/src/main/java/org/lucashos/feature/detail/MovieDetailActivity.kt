@@ -24,7 +24,6 @@ import org.lucashos.domain.entity.MovieBO
 import org.lucashos.domain.entity.MovieDetailBO
 import org.lucashos.domain.entity.MoviesListBO
 import org.lucashos.feature.R
-import java.util.logging.Logger
 import javax.inject.Inject
 
 class MovieDetailActivity : BaseActivity(R.layout.activity_movie_detail) {

@@ -1,7 +1,9 @@
 package org.lucashos.feature.detail
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import io.kotest.matchers.should
 import io.kotest.matchers.shouldBe
+import io.kotest.matchers.types.instanceOf
 import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.InjectMockKs
@@ -56,9 +58,8 @@ class MovieDetailViewModelTest {
             movieDetailUseCase.execute(any())
         } returns Single.just(mock)
         viewModel.getMovieDetail(1)
-        val result = viewModel.movieDetailLiveData.value as Either
-        assertTrue(result.isRight)
-        result.shouldBe(Either.Right(mock))
+        val result = viewModel.movieDetailLiveData.value
+        result.shouldBe(MovieDetailState.DetailsLoaded(mock))
     }
 
     @Test
@@ -68,16 +69,16 @@ class MovieDetailViewModelTest {
             movieDetailUseCase.execute(any())
         } returns Single.error(mock)
         viewModel.getMovieDetail(1)
-        val result = viewModel.movieDetailLiveData.value as Either
-        assertTrue(result.isLeft)
-        result.shouldBe(Either.Left(mock))
+        val result = viewModel.movieDetailLiveData.value
+        result shouldBe MovieDetailState.Error(mock)
     }
 
     @Test
     fun `Should return Exception on Either when id is lower then 0`() {
         viewModel.getMovieDetail(-1)
-        val result = viewModel.movieDetailLiveData.value as Either
-        assertTrue(result.isLeft)
+        val result = viewModel.movieDetailLiveData.value
+
+        result should instanceOf<MovieDetailState.EmptyList>()
     }
 
     @Test
@@ -115,7 +116,12 @@ class MovieDetailViewModelTest {
     fun `Should add favourite when requested movie isnt`() {
         val mock = createMovieDetailMock(isFavourite = false)
         every {
-            updateFavoriteMovieUseCase.execute(UpdateFavoriteMovieUseCase.Params(id = mock.id, isFav = mock.isFavourite))
+            updateFavoriteMovieUseCase.execute(
+                UpdateFavoriteMovieUseCase.Params(
+                    id = mock.id,
+                    isFav = mock.isFavourite
+                )
+            )
         } returns Single.just(true)
 
         viewModel.updateFavourite(mock)
@@ -128,7 +134,12 @@ class MovieDetailViewModelTest {
     fun `Should remove from favourites when requested movie is on list`() {
         val mock = createMovieDetailMock(isFavourite = true)
         every {
-            updateFavoriteMovieUseCase.execute(UpdateFavoriteMovieUseCase.Params(id = mock.id, isFav = mock.isFavourite))
+            updateFavoriteMovieUseCase.execute(
+                UpdateFavoriteMovieUseCase.Params(
+                    id = mock.id,
+                    isFav = mock.isFavourite
+                )
+            )
         } returns Single.just(false)
 
         viewModel.updateFavourite(mock)
@@ -142,7 +153,12 @@ class MovieDetailViewModelTest {
         val exception = getDummyException()
         val mock = createMovieDetailMock(isFavourite = true)
         every {
-            updateFavoriteMovieUseCase.execute(UpdateFavoriteMovieUseCase.Params(id = mock.id, isFav = mock.isFavourite))
+            updateFavoriteMovieUseCase.execute(
+                UpdateFavoriteMovieUseCase.Params(
+                    id = mock.id,
+                    isFav = mock.isFavourite
+                )
+            )
         } returns Single.error(exception)
 
         viewModel.updateFavourite(mock)
