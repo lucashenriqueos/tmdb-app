@@ -5,15 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.activity_movie_detail.iv_movie_detail_folder
-import kotlinx.android.synthetic.main.activity_movie_detail.rv_movie_detail_related
-import kotlinx.android.synthetic.main.activity_movie_detail.tv_movie_detail_overview
-import kotlinx.android.synthetic.main.activity_movie_detail.tv_movie_detail_rating
-import kotlinx.android.synthetic.main.activity_movie_detail.tv_movie_detail_release_date
-import kotlinx.android.synthetic.main.activity_movie_detail.tv_similar_titles
-import kotlinx.android.synthetic.main.layout_toolbar.ctv_toolbar_favourite
-import kotlinx.android.synthetic.main.layout_toolbar.iv_toolbar_share
-import kotlinx.android.synthetic.main.layout_toolbar.tv_toolbar_title
 import org.lucashos.core.base.BaseActivity
 import org.lucashos.core.dialog.ErrorDialog
 import org.lucashos.core.extension.gone
@@ -24,35 +15,39 @@ import org.lucashos.domain.entity.MovieBO
 import org.lucashos.domain.entity.MovieDetailBO
 import org.lucashos.domain.entity.MoviesListBO
 import org.lucashos.feature.R
+import org.lucashos.feature.databinding.ActivityMovieDetailBinding
 import javax.inject.Inject
 
-class MovieDetailActivity : BaseActivity(R.layout.activity_movie_detail) {
+class MovieDetailActivity : BaseActivity() {
+
+    override val binding by lazy { ActivityMovieDetailBinding.inflate(layoutInflater) }
 
     @Inject
     lateinit var viewModel: MovieDetailViewModel
 
-    lateinit var movie: MovieDetailBO
+    private lateinit var movie: MovieDetailBO
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val movieId = intent.getLongExtra(MOVIE_ID_EXTRA, -1)
         initObservers()
         initViews()
-        setupRecyclerView()
         viewModel.getMovieDetail(movieId)
         viewModel.getSimilarTitles(movieId)
     }
 
-    private fun setupRecyclerView() {
-        val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        rv_movie_detail_related.layoutManager = layoutManager
-    }
-
     private fun initViews() {
-        ctv_toolbar_favourite.visible()
-        iv_toolbar_share.visible()
-        ctv_toolbar_favourite.setOnClickListener {
-            viewModel.updateFavourite(movie)
+        val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.rvMovieDetailRelated.layoutManager = layoutManager
+
+        with(binding.toolbar) {
+            ivShare.visible()
+            ctvFavourite.apply {
+                visible()
+                setOnClickListener {
+                    viewModel.updateFavourite(movie)
+                }
+            }
         }
     }
 
@@ -81,7 +76,7 @@ class MovieDetailActivity : BaseActivity(R.layout.activity_movie_detail) {
         val adapter = RelatedMoviesAdapter(moviesListBO.movies) {
             goToMovieDetails(it)
         }
-        rv_movie_detail_related.adapter = adapter
+        binding.rvMovieDetailRelated.adapter = adapter
     }
 
     private fun handleSimilarMoviesError(throwable: Throwable) {
@@ -89,8 +84,8 @@ class MovieDetailActivity : BaseActivity(R.layout.activity_movie_detail) {
     }
 
     private fun hideSimilarTitles() {
-        rv_movie_detail_related.gone()
-        tv_similar_titles.gone()
+        binding.rvMovieDetailRelated.gone()
+        binding.tvSimilarTitles.gone()
     }
 
     private fun handleError(error: Throwable?) {
@@ -100,19 +95,18 @@ class MovieDetailActivity : BaseActivity(R.layout.activity_movie_detail) {
 
     private fun handleSuccess(movie: MovieDetailBO) {
         this.movie = movie
-        tv_toolbar_title.text = movie.title
-        tv_movie_detail_release_date.text =
-            movie.releaseDate?.toDateFormat() ?: getString(R.string.unkown_release_date)
-        tv_movie_detail_rating.text = movie.rating.toString()
-        tv_movie_detail_overview.text = movie.overview
-
-        toggleFavourite(movie.isFavourite)
-
-        iv_movie_detail_folder loadImage getString(R.string.images_base_url, movie.posterPath)
+        with(binding) {
+            toolbar.tvTitle.text = movie.title
+            tvMovieDetailReleaseDate.text = movie.releaseDate?.toDateFormat() ?: getString(R.string.unkown_release_date)
+            tvMovieDetailRating.text = movie.rating.toString()
+            tvMovieDetailOverview.text = movie.overview
+            ivMovieDetailFolder loadImage getString(R.string.images_base_url, movie.posterPath)
+            toggleFavourite(movie.isFavourite)
+        }
     }
 
     private fun toggleFavourite(isFav: Boolean) {
-        ctv_toolbar_favourite.isChecked = isFav
+        binding.toolbar.ctvFavourite.isChecked = isFav
     }
 
     private fun goToMovieDetails(movie: MovieBO) = startActivity(getStartIntent(this, movie.id))
