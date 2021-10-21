@@ -4,29 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="@dimen/movie_item_width"
     android:layout_height="wrap_content"
-    android:padding="@dimen/spacing_small"
     android:background="@android:color/transparent"
+    android:padding="@dimen/spacing_small"
     tools:background="@color/colorPrimary">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="@dimen/card_radius_small"
-        app:cardBackgroundColor="@color/surface_20">
+        app:cardBackgroundColor="@color/surface_20"
+        app:cardCornerRadius="@dimen/card_radius_small">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingVertical="@dimen/spacing_medium"
-            android:paddingHorizontal="@dimen/spacing_small">
+            android:paddingHorizontal="@dimen/spacing_small"
+            android:paddingVertical="@dimen/spacing_medium">
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/iv_item_movie_folder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scaleType="fitCenter"
-                app:shapeAppearanceOverlay="@style/ImageView.Corner_8_0_8_0"
                 app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearanceOverlay="@style/ImageView.Corner_8_0_8_0"
                 tools:src="@drawable/ic_baseline_movie_24" />
 
             <TextView
@@ -35,9 +35,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_small"
-                android:textStyle="bold"
-                android:maxLines="1"
                 android:ellipsize="end"
+                android:maxLines="1"
+                android:textStyle="bold"
                 app:layout_constraintTop_toBottomOf="@id/iv_item_movie_folder"
                 tools:text="@string/application_name" />
 
@@ -48,10 +48,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_small"
                 android:maxLines="1"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/iv_item_rating"
-                app:layout_constraintTop_toBottomOf="@+id/tv_item_title"
                 app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_item_title"
                 tools:text="10/10/2010" />
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -60,13 +60,13 @@
                 android:layout_width="@dimen/icon_medium"
                 android:layout_height="@dimen/icon_medium"
                 android:layout_marginStart="@dimen/spacing_medium"
-                app:srcCompat="@drawable/ic_baseline_star_24"
-                app:tint="@color/colorSecondary"
-                app:layout_constraintStart_toEndOf="@id/tv_item_release_date"
-                app:layout_constraintTop_toTopOf="@id/tv_item_release_date"
                 app:layout_constraintBottom_toBottomOf="@id/tv_item_release_date"
                 app:layout_constraintEnd_toStartOf="@id/tv_item_rating"
-                app:layout_constraintHorizontal_bias="1.0" />
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@id/tv_item_release_date"
+                app:layout_constraintTop_toTopOf="@id/tv_item_release_date"
+                app:srcCompat="@drawable/ic_baseline_star_24"
+                app:tint="@color/colorSecondary" />
 
             <TextView
                 android:id="@+id/tv_item_rating"
@@ -75,9 +75,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_small"
                 android:layout_marginEnd="@dimen/spacing_medium"
-                app:layout_constraintTop_toTopOf="@id/iv_item_rating"
                 app:layout_constraintBottom_toBottomOf="@id/iv_item_rating"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/iv_item_rating"
                 tools:text="9.1" />
 
 

@@ -15,7 +15,6 @@ import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import org.lucashos.domain.usecase.GetPopularMovieUseCase
 import org.lucashos.domain.usecase.ListTopMoviesUseCase
-import org.lucashos.domain.usecase.SearchMoviesUseCase
 import org.lucashos.domain.utils.Either
 import org.lucashos.feature.RxImmediateSchedulerRule
 import org.lucashos.feature.model.createMoviesListMock

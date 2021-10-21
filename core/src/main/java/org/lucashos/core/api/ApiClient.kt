@@ -35,6 +35,6 @@ class ApiClient(baseUrl: String) {
         .build()
 
     private fun getLoggerInterceptor() = HttpLoggingInterceptor().apply {
-        level  = HttpLoggingInterceptor.Level.BODY
+        level = HttpLoggingInterceptor.Level.BODY
     }
 }
