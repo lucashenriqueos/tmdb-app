@@ -24,6 +24,7 @@ ext {
             kotest_version          : '5.0.0.M3',
             kotest_arrow_version    : '4.4.3',
             jacoco_version          : '0.8.1',
+            view_binding_version    : '4.1.3'
     ]
 
     deps = [
@@ -38,6 +39,7 @@ ext {
                 implementation "androidx.appcompat:appcompat:$deps_versions.appcompat_version"
                 implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$deps_versions.lifecycle_version"
                 implementation "androidx.lifecycle:lifecycle-livedata-ktx:$deps_versions.lifecycle_version"
+                implementation "androidx.databinding:viewbinding:$deps_versions.view_binding_version"
             },
             design  : {
                 implementation "androidx.recyclerview:recyclerview:$deps_versions.recycler_view_version"

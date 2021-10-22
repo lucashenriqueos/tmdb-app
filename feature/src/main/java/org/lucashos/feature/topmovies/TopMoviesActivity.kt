@@ -4,28 +4,27 @@ import android.os.Bundle
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.activity_top_movies.iv_highlight_movie_folder
-import kotlinx.android.synthetic.main.activity_top_movies.rv_movies_list
-import kotlinx.android.synthetic.main.activity_top_movies.tv_highlight_genres
-import kotlinx.android.synthetic.main.layout_toolbar.tv_toolbar_title
 import org.lucashos.core.base.BaseActivity
 import org.lucashos.core.extension.loadImage
 import org.lucashos.domain.entity.MovieBO
 import org.lucashos.domain.entity.MoviesListBO
 import org.lucashos.feature.R
+import org.lucashos.feature.databinding.ActivityTopMoviesBinding
 import org.lucashos.feature.detail.MovieDetailActivity
 import javax.inject.Inject
 
-class TopMoviesActivity : BaseActivity(R.layout.activity_top_movies) {
+class TopMoviesActivity : BaseActivity() {
+
+    override val binding by lazy { ActivityTopMoviesBinding.inflate(layoutInflater) }
 
     @Inject
     lateinit var viewModel: TopMoviesViewModel
 
     lateinit var scrollListener: EndlessRecyclerViewScrollListener
 
-    var totalPages = 0
+    private var totalPages = 0
 
-    var movies: ArrayList<MovieBO> = arrayListOf()
+    private var movies: ArrayList<MovieBO> = arrayListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,17 +40,17 @@ class TopMoviesActivity : BaseActivity(R.layout.activity_top_movies) {
         }
         viewModel.popularMovieLiveData.observe({ lifecycle }) {
             when (it) {
-                is PopularMovieState.HighlightMovie -> handleHighlightMoviesSuccess(it)
+                is PopularMovieState.HighlightMovie -> handleHighlightMoviesSuccess(it.movie)
                 is PopularMovieState.Error -> handleError(it.error)
             }
         }
     }
 
-    private fun handleHighlightMoviesSuccess(highlight: PopularMovieState.HighlightMovie) {
-        with(highlight.movie) {
-            tv_highlight_genres.text = this.getGenresAsString()
-            iv_highlight_movie_folder loadImage getString(R.string.images_base_url, this.posterPath)
-            iv_highlight_movie_folder.setOnClickListener {
+    private fun handleHighlightMoviesSuccess(movie: MovieBO) {
+        with(movie) {
+            binding.tvHighlightGenres.text = this.getGenresAsString()
+            binding.ivHighlightMovieFolder loadImage getString(R.string.images_base_url, this.posterPath)
+            binding.ivHighlightMovieFolder.setOnClickListener {
                 goToMovieDetails(this.id)
             }
         }
@@ -61,11 +60,11 @@ class TopMoviesActivity : BaseActivity(R.layout.activity_top_movies) {
         val startSize = movies.size
         totalPages = moviesList.totalPages
         movies.addAll(moviesList.movies)
-        (rv_movies_list.adapter as TopMoviesAdapter).notifyItemRangeChanged(startSize, movies.size)
+        (binding.rvMoviesList.adapter as TopMoviesAdapter).notifyItemRangeChanged(startSize, movies.size)
     }
 
     private fun setupRecyclerView() {
-        with(rv_movies_list) {
+        with(binding.rvMoviesList) {
             val linearLayoutManager = LinearLayoutManager(this@TopMoviesActivity, RecyclerView.HORIZONTAL, false)
 
             layoutManager = linearLayoutManager

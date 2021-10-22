@@ -6,14 +6,14 @@
     android:background="@android:color/transparent">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/title_toolbar"
+        android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/spacing_medium"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_toolbar_share"
+            android:id="@+id/iv_share"
             android:layout_width="@dimen/icon_large"
             android:layout_height="@dimen/icon_large"
             android:visibility="gone"
@@ -22,7 +22,7 @@
             app:tint="@color/primaryText" />
 
         <TextView
-            android:id="@+id/tv_toolbar_title"
+            android:id="@+id/tv_title"
             style="@style/Toolbar.Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -31,7 +31,7 @@
             android:textStyle="bold" />
 
         <CheckedTextView
-            android:id="@+id/ctv_toolbar_favourite"
+            android:id="@+id/ctv_favourite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone"
