@@ -4,109 +4,109 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:fillViewport="true"
-    android:background="@color/default_background">
+    android:background="@color/default_background"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/layout_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/iv_movie_detail_folder"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/folder_height"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:layout_marginBottom="@dimen/spacing_medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            tools:srcCompat="@drawable/ic_baseline_movie_24"
+            tools:tint="@color/colorPrimaryDark" />
+
+        <TextView
+            android:id="@+id/tv_movie_detail_release_date"
+            style="@style/TextAppearance.MaterialComponents.Caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_medium"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_movie_detail_folder"
+            tools:text="07/02/1976" />
+
+        <TextView
+            android:id="@+id/tv_movie_detail_rating"
+            style="@style/Caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/tv_movie_detail_release_date"
+            app:layout_constraintEnd_toStartOf="@id/tv_movie_detail_rating_img"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintTop_toTopOf="@id/tv_movie_detail_release_date"
+            tools:text="8.1" />
+
+        <ImageView
+            android:id="@+id/tv_movie_detail_rating_img"
+            android:layout_width="@dimen/icon_medium"
+            android:layout_height="@dimen/icon_medium"
+            android:layout_marginEnd="@dimen/spacing_medium"
+            android:src="@drawable/ic_baseline_star_24"
+            app:layout_constraintBottom_toBottomOf="@id/tv_movie_detail_rating"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintTop_toTopOf="@id/tv_movie_detail_rating"
+            app:tint="@color/colorPrimaryDark" />
+
+        <TextView
+            android:id="@+id/tv_movie_detail_overview"
+            style="@style/Body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:layout_marginBottom="@dimen/spacing_small"
+            app:layout_constraintBottom_toTopOf="@id/ll_movie_detail_related"
+            app:layout_constraintTop_toBottomOf="@id/tv_movie_detail_release_date"
+            tools:text="A small-time boxer gets a supremely rare chance to fight a heavy-weight champion in a bout in which he strives to go the distance for his self-respect." />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ll_movie_detail_related"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <include
-                android:id="@+id/toolbar"
-                layout="@layout/layout_toolbar"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent" />
-
-            <ImageView
-                android:id="@+id/iv_movie_detail_folder"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/folder_height"
-                android:layout_marginTop="@dimen/spacing_large"
-                android:layout_marginBottom="@dimen/spacing_medium"
-                app:layout_constraintTop_toBottomOf="@id/toolbar"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                tools:srcCompat="@drawable/ic_baseline_movie_24"
-                tools:tint="@color/colorPrimaryDark" />
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:paddingHorizontal="@dimen/spacing_medium"
+            android:paddingTop="@dimen/spacing_large"
+            android:paddingBottom="@dimen/spacing_medium"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_movie_detail_overview">
 
             <TextView
-                android:id="@+id/tv_movie_detail_release_date"
-                style="@style/TextAppearance.MaterialComponents.Caption"
-                android:layout_width="wrap_content"
+                android:id="@+id/tv_similar_titles"
+                style="@style/Subtitle"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_medium"
+                android:text="@string/similar_titles"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/iv_movie_detail_folder"
-                tools:text="07/02/1976" />
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/tv_movie_detail_rating"
-                style="@style/Caption"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="@id/tv_movie_detail_release_date"
-                app:layout_constraintBottom_toBottomOf="@id/tv_movie_detail_release_date"
-                app:layout_constraintEnd_toStartOf="@id/tv_movie_detail_rating_img"
-                app:layout_constraintHorizontal_bias="1.0"
-                tools:text="8.1" />
-
-            <ImageView
-                android:id="@+id/tv_movie_detail_rating_img"
-                android:layout_width="@dimen/icon_medium"
-                android:layout_height="@dimen/icon_medium"
-                android:layout_marginEnd="@dimen/spacing_medium"
-                android:src="@drawable/ic_baseline_star_24"
-                app:tint="@color/colorPrimaryDark"
-                app:layout_constraintBottom_toBottomOf="@id/tv_movie_detail_rating"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintTop_toTopOf="@id/tv_movie_detail_rating" />
-
-            <TextView
-                android:id="@+id/tv_movie_detail_overview"
-                style="@style/Body"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_movie_detail_related"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/spacing_medium"
                 android:layout_marginTop="@dimen/spacing_medium"
                 android:layout_marginBottom="@dimen/spacing_small"
-                app:layout_constraintTop_toBottomOf="@id/tv_movie_detail_release_date"
-                app:layout_constraintBottom_toTopOf="@id/ll_movie_detail_related"
-                tools:text="A small-time boxer gets a supremely rare chance to fight a heavy-weight champion in a bout in which he strives to go the distance for his self-respect." />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_similar_titles"
+                tools:listitem="@layout/item_related_movies" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/ll_movie_detail_related"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/spacing_large"
-                android:paddingBottom="@dimen/spacing_medium"
-                android:paddingHorizontal="@dimen/spacing_medium"
-                android:background="@color/colorAccent"
-                app:layout_constraintEnd_toStartOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_movie_detail_overview"
-                app:layout_constraintBottom_toBottomOf="parent">
-
-                <TextView
-                    android:id="@+id/tv_similar_titles"
-                    style="@style/Subtitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/similar_titles"
-                    android:layout_marginStart="@dimen/spacing_medium"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"/>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_movie_detail_related"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_medium"
-                    android:layout_marginBottom="@dimen/spacing_small"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_similar_titles"
-                    tools:listitem="@layout/item_related_movies"/>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

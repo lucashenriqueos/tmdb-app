@@ -14,19 +14,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:tint="@color/colorPrimaryDark"
-        tools:src="@drawable/ic_baseline_movie_24"/>
+        tools:src="@drawable/ic_baseline_movie_24"
+        tools:tint="@color/colorPrimaryDark" />
 
     <TextView
         android:id="@+id/tv_related_movie_title"
         style="@style/Caption"
-        android:layout_height="wrap_content"
         android:layout_width="0dp"
-        android:textStyle="bold"
+        android:layout_height="wrap_content"
         android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@id/iv_related_movie_thumb"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:text="Mocky Balboa"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_related_movie_thumb"
+        tools:text="Mocky Balboa" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

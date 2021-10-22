@@ -2,7 +2,6 @@ package org.lucashos.data.service
 
 import io.reactivex.Single
 import org.lucashos.data.domain.response.GenreListResponse
-import org.lucashos.data.domain.response.GenreResponse
 import org.lucashos.data.domain.response.MovieDetailResponse
 import org.lucashos.data.domain.response.MoviesListResponse
 import retrofit2.http.GET

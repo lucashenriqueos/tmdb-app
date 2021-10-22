@@ -1,7 +1,7 @@
 package org.lucashos.core.extension
 
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Locale
 
 fun String.toDateFormat(): String? =
     this
